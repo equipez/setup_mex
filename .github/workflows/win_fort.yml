@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2021]
+        os: [windows-2019]
         language: [Fortran]
         matlab: [latest]
 
