@@ -28,7 +28,8 @@ jobs:
         #shell: bash
         #run: windows/install_oneapi_windows.bat
         #run: cmd.exe "/K" '"windows/intelvars_windows.bat" && powershell'
-        run: cmd.exe windows/install_oneapi_windows.bat
+        #run: cmd.exe windows/install_oneapi_windows.bat
+        run: cmd.exe "/K" '"windows/install_oneapi_windows.bat" && powershell'
 
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v1.1.0
