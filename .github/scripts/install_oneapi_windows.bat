@@ -19,6 +19,7 @@ curl.exe --output webimage.exe --url %URL% --retry 5 --retry-delay 5
 start /b /wait webimage.exe -s -x -f webimage_extracted --log extract.log
 del webimage.exe
 webimage_extracted\bootstrapper.exe -s --action install --components=%COMPONENTS% --eula=accept -p=NEED_VS2017_INTEGRATION=0 -p=NEED_VS2019_INTEGRATION=0 -p=NEED_VS2022_INTEGRATION=0 --log-dir=.
+set installer_exit_code=%ERRORLEVEL%
 
 :: Run the script that sets the environment variables.
 for /f "tokens=* usebackq" %%f in (`dir /b "C:\Program Files (x86)\Intel\oneAPI\compiler\" ^| findstr /V latest ^| sort`) do @set "LATEST_ONEAPI_VERSION=%%f"
@@ -36,5 +37,4 @@ where ifx.exe
 rd /s/q "webimage_extracted"
 
 :: Exit with the installer exit code.
-set installer_exit_code=%ERRORLEVEL%
 exit /b %installer_exit_code%
