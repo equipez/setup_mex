@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2019, windows-latest]
+        os: [macos-latest]
         matlab: [latest]
 
     steps:
