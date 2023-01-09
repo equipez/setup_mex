@@ -47,7 +47,6 @@ jobs:
         uses: matlab-actions/run-command@v1
         with:
           command: |
-            mex('-setup', '-v', 'FORTRAN');
             mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
             timestwo(1);
             delete('timestwo.mex*');
