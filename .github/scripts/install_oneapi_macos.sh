@@ -9,7 +9,8 @@
 
 # URL for the offline installer of Intel OneAPI Fortran compiler. See
 # https://www.intel.com/content/www/us/en/developer/articles/tool/oneapi-standalone-components.html
-URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/18341/m_HPCKit_p_2022.1.0.86_offline.dmg
+URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/19106/m_fortran-compiler-classic_p_2023.0.0.25379_offline.dmg
+#https://registrationcenter-download.intel.com/akdlm/irc_nas/18341/m_HPCKit_p_2022.1.0.86_offline.dmg
 COMPONENTS=intel.oneapi.mac.ifort-compiler
 
 # Download the installer.
