@@ -37,7 +37,10 @@ jobs:
         uses: matlab-actions/run-command@v1
         with:
           command: |
-            setenv('ONEAPI_ROOT', 'C:\Program Files (x86)\Intel\oneAPI');
+            %setenv('ONEAPI_ROOT', 'C:\Program Files (x86)\Intel\oneAPI');
+            intel_oneapi_dirs = dir(fullfile('C:', '**', 'oneAPI'));
+            intel_oneapi_root = intel_oneapi_dirs(1).folder;
+            setenv('ONEAPI_ROOT', intel_oneapi_root);
             mex('-setup', '-v', 'FORTRAN');
             mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
             timestwo(1);
