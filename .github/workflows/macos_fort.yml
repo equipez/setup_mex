@@ -23,8 +23,8 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-          #- name: install Intel oneAPI
-        #run: bash .github/scripts/install_oneapi_macos.sh
+      - name: install Intel oneAPI
+        run: bash .github/scripts/install_oneapi_macos.sh
 
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v1.1.0
@@ -35,7 +35,7 @@ jobs:
         uses: matlab-actions/run-command@v1
         with:
           command: |
-            %setenv('ONEAPI_ROOT', '/opt/intel/oneapi');  % Needed.
+            setenv('ONEAPI_ROOT', '/opt/intel/oneapi');  % Needed.
             mex('-setup', '-v', 'FORTRAN');
             mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
             timestwo(1)
