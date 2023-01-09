@@ -14,7 +14,7 @@ on:
 
 jobs:
   test:
-    name: Test MEX for Fortran on Windows
+    name: Test MEX
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false

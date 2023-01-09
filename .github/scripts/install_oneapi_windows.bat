@@ -13,11 +13,13 @@ set URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/19107/w_fort
 :: Component to install.
 set COMPONENTS=intel.oneapi.win.ifort-compiler
 
-:: Install the compiler.
+:: Download the installer.
 cd %Temp%
 curl.exe --output webimage.exe --url %URL% --retry 5 --retry-delay 5
 start /b /wait webimage.exe -s -x -f webimage_extracted --log extract.log
 del webimage.exe
+
+:: Install the compiler.
 webimage_extracted\bootstrapper.exe -s --action install --components=%COMPONENTS% --eula=accept -p=NEED_VS2017_INTEGRATION=0 -p=NEED_VS2019_INTEGRATION=0 -p=NEED_VS2022_INTEGRATION=0 --log-dir=.
 set installer_exit_code=%ERRORLEVEL%
 
