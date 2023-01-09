@@ -1,4 +1,7 @@
-name: Test MEX, Windows, Fortran
+name: Test MEX, Windows
+# MATLAB R2022b requires Intel OneAPI 2021 with Microsoft Visual Studio 2019.
+# Intel OneAPI is installed by windows/install_oneapi_windows.bat, and Microsoft Visual Studio 2019
+# is available with windows-2019 but not windows-2022.
 
 on:
   # Trigger the workflow on push or pull request
@@ -16,8 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2019]
-        language: [Fortran]
+        os: [windows-2019, windows-latest]
         matlab: [latest]
 
     steps:
@@ -36,8 +38,7 @@ jobs:
         uses: matlab-actions/run-command@v1
         with:
           command: |
-            setenv('ONEAPI_ROOT', 'C:\Program Files (x86)\Intel\oneAPI');
+            setenv('ONEAPI_ROOT', 'C:\Program Files (x86)\Intel\oneAPI');  % Needed.
             mex('-setup', '-v', 'FORTRAN');
             mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
-            timestwo(1);
-            delete('timestwo.mex*');
+            timestwo(1)

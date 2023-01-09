@@ -2,6 +2,8 @@
 :: See https://github.com/oneapi-src/oneapi-ci
 :: https://github.com/oneapi-src/oneapi-ci/blob/master/scripts/install_windows.bat
 ::
+:: OneAPI version: 2023.0.0
+::
 :: Zaikun Zhang (www.zhangzk.net), January 9, 2023
 
 :: URL for the offline installer of Intel OneAPI Fortran compiler. See
@@ -23,11 +25,11 @@ for /f "tokens=* usebackq" %%f in (`dir /b "C:\Program Files (x86)\Intel\oneAPI\
 @call "C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_ONEAPI_VERSION%\env\vars.bat"
 
 :: Show the result of the installation.
-echo "The latest Intel OneAPI installed is:"
+echo The latest Intel OneAPI installed is:
 echo %LATEST_ONEAPI_VERSION%
-echo "The path to ifort is:"
+echo The path to ifort is:
 where ifort.exe
-echo "The path to ifx is:"
+echo The path to ifx is:
 where ifx.exe
 
 :: Remove the `webimage_extracted` directory.
