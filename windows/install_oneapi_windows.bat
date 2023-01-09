@@ -15,8 +15,3 @@ for /f "tokens=* usebackq" %%f in (`dir /b "C:\Program Files (x86)\Intel\oneAPI\
 echo %LATEST_VERSION%
 where ifort.exe
 where ifx.exe
-
-:: set ONEAPI_ROOT=C:\Program Files (x86)\Intel\oneAPI
-:: set ONEAPI_VER=%LATEST_VERSION%
-:: set IFORT_COMPILER21=C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_VERSION%\windows
-:: set PATH=%PATH%;C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_VERSION%\windows\bin\intel64;C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_VERSION%\windows\bin

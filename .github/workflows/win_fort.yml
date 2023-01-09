@@ -27,9 +27,6 @@ jobs:
       - name: install Intel oneAPI on Windows
         shell: bash
         run: windows/install_oneapi_windows.bat
-      # - name: Run intelvars_windows.bat
-      #   run: |
-      #     cmd.exe "/K" '"windows/intelvars_windows.bat" && powershell'
 
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v1.1.0
@@ -41,7 +38,15 @@ jobs:
         with:
           command: |
             setenv('ONEAPI_ROOT', 'C:\Program Files (x86)\Intel\oneAPI');
-            getenv('ONEAPI_ROOT')
+            mex('-setup', '-v', 'FORTRAN');
+            mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
+            timestwo(1);
+            delete('timestwo.mex*');
+
+      - name: Run script
+        uses: matlab-actions/run-command@v1
+        with:
+          command: |
             mex('-setup', '-v', 'FORTRAN');
             mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
             timestwo(1);
