@@ -1,3 +1,6 @@
+REM See https://github.com/oneapi-src/oneapi-ci
+REM https://github.com/oneapi-src/oneapi-ci/blob/master/scripts/install_windows.bat
+
 set URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/18529/w_HPCKit_p_2022.1.2.116_offline.exe
 set COMPONENTS=intel.oneapi.win.ifort-compiler
 
@@ -13,7 +16,7 @@ echo %LATEST_VERSION%
 where ifort.exe
 where ifx.exe
 
-set ONEAPI_VER=%LATEST_VERSION%
-set ONEAPI_ROOT=C:\Program Files (x86)\Intel\oneAPI
-set IFORT_COMPILER21=C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_VERSION%\windows
-set PATH=%PATH%;C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_VERSION%\windows\bin\intel64;C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_VERSION%\windows\bin
+:: set ONEAPI_ROOT=C:\Program Files (x86)\Intel\oneAPI
+:: set ONEAPI_VER=%LATEST_VERSION%
+:: set IFORT_COMPILER21=C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_VERSION%\windows
+:: set PATH=%PATH%;C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_VERSION%\windows\bin\intel64;C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_VERSION%\windows\bin
