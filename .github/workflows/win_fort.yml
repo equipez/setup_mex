@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: install Intel oneAPI on Windows
-        run: cmd.exe "/K" 'windows/install_oneapi_windows.bat && powershell'
+        run: cmd.exe "/K" '"windows/install_oneapi_windows.bat" && powershell'
 
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v1.1.0
