@@ -27,9 +27,9 @@ jobs:
       - name: install Intel oneAPI on Windows
         shell: bash
         run: windows/install_oneapi_windows.bat
-      - name: Run intelvars_windows.bat
-        run: |
-          cmd.exe "/K" '"windows/intelvars_windows.bat" && powershell'
+      # - name: Run intelvars_windows.bat
+      #   run: |
+      #     cmd.exe "/K" '"windows/intelvars_windows.bat" && powershell'
 
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v1.1.0
