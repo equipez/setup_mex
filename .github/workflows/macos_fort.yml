@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-11 #, macos-latest]
+        os: [macos-11] #, macos-latest]
         matlab: [latest]
 
     steps:
