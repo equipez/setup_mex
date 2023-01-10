@@ -11,6 +11,9 @@ function success = try_mex_setup(language)
 % up before, and because MEX setup may fail even if it succeeded before due to change of environment.
 success = mex_well_configured(language, false);  % verbose = false
 if success == 1
+
+    display '0th success'
+
     return
 end
 

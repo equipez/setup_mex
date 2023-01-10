@@ -43,16 +43,18 @@ jobs:
 
       - name: Install Intel oneAPI on Windows for Fortran
         if: startsWith(matrix.os, 'windows') && matrix.lang == 'Fortran'
-        run: cmd.exe "/K" '"install_oneapi_windows.bat" && powershell'
+          #run: cmd.exe "/K" '"install_oneapi_windows.bat" && powershell'
+        run: cmd.exe "/K" '"install_oneapi2021_windows.bat" && powershell'
 
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v1.1.0
         with:
           release: ${{ matrix.matlab }}
 
-      - name: Run test
+      - name: Run the test
         uses: matlab-actions/run-command@v1
         with:
           command: |
             lang = upper('${{ matrix.lang }}');
+            try_mex_setup(lang);
             try_mex_setup(lang);
