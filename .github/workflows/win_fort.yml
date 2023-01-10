@@ -5,7 +5,7 @@ name: Test MEX, Fortran, Windows
 
 on:
   # Trigger the workflow on push or pull request
-  push:
+  #push:
   # Trigger the workflow by cron. The default time zone of GitHub Actions is UTC.
   schedule:
     - cron: '0 20 * * 0'
@@ -39,7 +39,7 @@ jobs:
         with:
           command: |
             setenv('ONEAPI_ROOT', 'C:\Program Files (x86)\Intel\oneAPI\');  % Needed.
-            setenv('IFORT_COMPILER18', [getenv('ONEAPI_ROOT'), 'compiler\latest\windows'])
+            setenv('IFORT_COMPILER18', [getenv('ONEAPI_ROOT'), 'compiler\latest\windows\'])
             mex('-setup', '-v', 'FORTRAN');
             mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
             timestwo(1)
