@@ -16,14 +16,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-11, macos-latest]
+        os: [macos-11 #, macos-latest]
         matlab: [latest]
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: install Intel oneAPI
+      - name: Install Intel oneAPI
         run: bash .github/scripts/install_oneapi_macos.sh
 
       - name: Set up MATLAB

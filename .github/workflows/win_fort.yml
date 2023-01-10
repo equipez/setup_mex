@@ -5,7 +5,7 @@ name: Test MEX, Fortran, Windows
 
 on:
   # Trigger the workflow on push or pull request
-  #push:
+  push:
   # Trigger the workflow by cron. The default time zone of GitHub Actions is UTC.
   schedule:
     - cron: '0 20 * * 0'
@@ -19,14 +19,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2019, windows-latest]
-        matlab: [latest]
+        os: [windows-2019] #, windows-latest]
+        matlab: [2020a, 2020b, 2021a, 2021b, 2022a, latest]
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: install Intel oneAPI on Windows
+      - name: Install Intel oneAPI on Windows
         run: cmd.exe "/K" '".github/scripts/install_oneapi_windows.bat" && powershell'
 
       - name: Set up MATLAB
