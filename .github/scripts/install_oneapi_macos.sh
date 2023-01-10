@@ -13,7 +13,7 @@ URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/19106/m_fortran-
 COMPONENTS=intel.oneapi.mac.ifort-compiler
 
 # Download the installer.
-cd "$TMPDIR" || exit 1
+cd "$TMPDIR" || exit 42
 curl --output webimage.dmg --url "$URL" --retry 5 --retry-delay 5
 hdiutil attach webimage.dmg
 
@@ -25,7 +25,7 @@ installer_exit_code=$?
 source /opt/intel/oneapi/setvars.sh
 
 # Show the result of the installation.
-echo "The latest Intel OneAPI installed is:"
+echo "The latest ifort installed is:"
 ifort --version
 echo "The path to ifort is:"
 command -v ifort

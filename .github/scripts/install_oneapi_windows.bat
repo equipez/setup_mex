@@ -24,14 +24,15 @@ webimage_extracted\bootstrapper.exe -s --action install --components=%COMPONENTS
 set installer_exit_code=%ERRORLEVEL%
 
 :: Run the script that sets the environment variables.
-for /f "tokens=* usebackq" %%f in (`dir /b "C:\Program Files (x86)\Intel\oneAPI\compiler\" ^| findstr /V latest ^| sort`) do @set "LATEST_ONEAPI_VERSION=%%f"
-@call "C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_ONEAPI_VERSION%\env\vars.bat"
+call "C:\Program Files (x86)\Intel\oneAPI\setvars.bat"
 
 :: Show the result of the installation.
-echo The latest Intel OneAPI installed is:
-echo %LATEST_ONEAPI_VERSION%
+echo The latest ifort installed is:
+ifort.exe
 echo The path to ifort is:
 where ifort.exe
+echo The latest ifx installed is:
+ifx.exe
 echo The path to ifx is:
 where ifx.exe
 

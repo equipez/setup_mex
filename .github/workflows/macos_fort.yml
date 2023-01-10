@@ -5,7 +5,7 @@ on:
   push:
   # Trigger the workflow by cron. The default time zone of GitHub Actions is UTC.
   schedule:
-    - cron: '0 20 * * 0'
+    - cron: '0 20 * * 6'
   # Trigger the workflow when it is manually triggered
   workflow_dispatch:
 
@@ -18,6 +18,18 @@ jobs:
       matrix:
         os: [macos-11, macos-latest, windows-2019, windows-latest]
         matlab: [R2020a, R2020b, R2021a, R2021b, R2022a, latest]
+      exclude:
+        os: windows-2019
+        matlab: R2020a
+      exclude:
+        os: windows-2019
+        matlab: R2020b
+      exclude:
+        os: windows-latest
+        matlab: R2020a
+      exclude:
+        os: windows-latest
+        matlab: R2020b
 
     steps:
       - name: Check out repository
@@ -43,7 +55,7 @@ jobs:
             if ismac
                 oneapi_root = '/opt/intel/oneapi/';
                 ifort_compiler18 = [oneapi_root, 'compiler/latest/mac/'];
-            elseif ispc && ~isunix
+            elseif ispc && ~isunix  % Windows
                 oneapi_root = 'C:\Program Files (x86)\Intel\oneAPI\';
                 ifort_compiler18 = [oneapi_root, 'compiler\latest\windows\'];
             end
