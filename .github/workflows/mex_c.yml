@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-11] #, macos-latest, windows-2019, windows-latest]
-        matlab: [latest] #[R2020a, R2020b, R2021a, R2021b, R2022a, latest]
+        matlab: [latest, R2020a] #[R2020a, R2020b, R2021a, R2021b, R2022a, latest]
         lang: [C, C++]
         exclude:
           - os: windows-2019
