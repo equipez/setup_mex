@@ -37,8 +37,10 @@ jobs:
           command: |
             setenv('ONEAPI_ROOT', '/opt/intel/oneapi/');  % Needed.
             setenv('IFORT_COMPILER18', [getenv('ONEAPI_ROOT'), 'compiler/latest/mac/'])
+            setenv('PATH', [getenv('PATH'), ':', getenv('IFORT_COMPILER18'), 'bin/intel64/']);
+            getenv('PATH')
             %system(['PATH=$PATH:', getenv('IFORT_COMPILER18'), 'bin/intel64/']);
-            system(['source ', getenv('ONEAPI_ROOT'), 'setvars.sh']);
+            %system(['source ', getenv('ONEAPI_ROOT'), 'setvars.sh']);
             mex('-setup', '-v', 'FORTRAN');
             mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
             timestwo(1)
