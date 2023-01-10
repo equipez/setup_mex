@@ -21,13 +21,10 @@ jobs:
         exclude:
           - os: windows-2019
             matlab: R2020a
-        exclude:
           - os: windows-2019
             matlab: R2020b
-        exclude:
           - os: windows-latest
             matlab: R2020a
-        exclude:
           - os: windows-latest
             matlab: R2020b
 
