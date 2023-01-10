@@ -35,7 +35,7 @@ jobs:
 
       - name: Install Intel oneAPI on macOS
         if: startsWith(matrix.os, 'macos')
-        run: sudo bash .github/scripts/install_oneapi_macos.sh ${{ matrix.lang }}
+          #run: sudo bash .github/scripts/install_oneapi_macos.sh ${{ matrix.lang }}
 
       - name: Install Intel oneAPI on Windows
         if: startsWith(matrix.os, 'windows')
@@ -50,18 +50,6 @@ jobs:
         uses: matlab-actions/run-command@v1
         with:
           command: |
-            if ismac
-                oneapi_root = '/opt/intel/oneapi/';
-                ifort_compiler18 = [oneapi_root, 'compiler/latest/mac/'];
-            elseif ispc && ~isunix  % Windows
-                oneapi_root = 'C:\Program Files (x86)\Intel\oneAPI\';
-                ifort_compiler18 = [oneapi_root, 'compiler\latest\windows\'];
-            end
-            ifort_path = [ifort_compiler18, 'bin/intel64/'];
-            setenv('ONEAPI_ROOT', oneapi_root);
-            setenv('IFORT_COMPILER18', ifort_compiler18);
-            setenv('PATH', [getenv('PATH'), ':', ifort_path]);
-
             mex('-setup', '-v', '${{ matrix.lang }}');
             %mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
             mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.c'));

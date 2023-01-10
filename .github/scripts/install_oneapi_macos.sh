@@ -25,7 +25,7 @@ fi
 if [[ "$LG" = "fortran" ]] ; then
     URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/19106/m_fortran-compiler-classic_p_2023.0.0.25379_offline.dmg
     COMPONENTS=intel.oneapi.mac.ifort-compiler
-elif [[ "$LG" = "c" || "$LG" = "cpp" || "$LG" = "c++" ]] ; then
+else
     URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/19097/m_cpp-compiler-classic_p_2023.0.0.25429_offline.dmg
     COMPONENTS=intel.oneapi.mac.cpp-compiler
 fi
