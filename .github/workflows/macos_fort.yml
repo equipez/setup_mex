@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-11, macos-latest]
-        matlab: [2020a, 2020b, 2021a, 2021b, 2022a, latest]
+        matlab: [R20R20a, R20R20b, R2021a, R2021b, R2022a, latest]
 
     steps:
       - name: Check out repository
