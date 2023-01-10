@@ -18,7 +18,7 @@ curl --output webimage.dmg --url "$URL" --retry 5 --retry-delay 5
 hdiutil attach webimage.dmg
 
 # Install the compiler.
-sudo /Volumes/"$(basename "$URL" .dmg)"/bootstrapper.app/Contents/MacOS/bootstrapper -s --action install --components="$COMPONENTS" --eula=accept --log-dir=.
+/Volumes/"$(basename "$URL" .dmg)"/bootstrapper.app/Contents/MacOS/bootstrapper -s --action install --components="$COMPONENTS" --eula=accept --log-dir=.
 installer_exit_code=$?
 
 # Run the script that sets the environment variables.

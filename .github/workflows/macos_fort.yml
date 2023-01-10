@@ -1,4 +1,4 @@
-name: Test MEX, Fortran, macOS
+name: Test MEX, Fortran
 
 on:
   # Trigger the workflow on push or pull request
@@ -23,8 +23,13 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-          #      - name: Install Intel oneAPI
-          #        run: bash .github/scripts/install_oneapi_macos.sh
+      - name: Install Intel oneAPI on macOS
+        if: startsWith(matrix.os, 'macos')
+        run: sudo bash .github/scripts/install_oneapi_macos.sh
+
+      - name: Install Intel oneAPI on Windows
+        if: startsWith(matrix.os, 'windows')
+        run: cmd.exe "/K" '".github/scripts/install_oneapi_windows.bat" && powershell'
 
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v1.1.0
@@ -36,11 +41,9 @@ jobs:
         with:
           command: |
             if ismac
-                system('bash .github/scripts/install_oneapi_macos.sh');
                 oneapi_root = '/opt/intel/oneapi/';
                 ifort_compiler18 = [oneapi_root, 'compiler/latest/mac/'];
-            else if ispc && ~isunix
-                system('cmd.exe "/K" ''".github/scripts/install_oneapi_windows.bat" && powershell''');
+            elseif ispc && ~isunix
                 oneapi_root = 'C:\Program Files (x86)\Intel\oneAPI\';
                 ifort_compiler18 = [oneapi_root, 'compiler\latest\windows\'];
             end
@@ -48,6 +51,7 @@ jobs:
             setenv('ONEAPI_ROOT', oneapi_root);
             setenv('IFORT_COMPILER18', ifort_compiler18);
             setenv('PATH', [getenv('PATH'), ':', ifort_path]);
+
             mex('-setup', '-v', 'FORTRAN');
             mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
             timestwo(1)
