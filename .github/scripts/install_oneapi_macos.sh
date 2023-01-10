@@ -7,13 +7,31 @@
 #
 # Zaikun Zhang (www.zhangzk.net), January 9, 2023
 
-# URL for the offline installer of Intel OneAPI Fortran compiler. See
-# https://www.intel.com/content/www/us/en/developer/articles/tool/oneapi-standalone-components.html
-URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/19106/m_fortran-compiler-classic_p_2023.0.0.25379_offline.dmg
-COMPONENTS=intel.oneapi.mac.ifort-compiler
+if [[ $# -eq 0 ]]; then
+    printf "\n\nUsage: install_oneapi_macos Fortran|C|C++.\n\n"
+    exit 1
+fi
 
-# Download the installer.
-cd "$TMPDIR" || exit 42
+LG=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+
+if [[ "$LG" != "fortran" && "$LG" != "c" && "$LG" != "c++" && "$LG" != "cpp" ]]; then
+    printf "\n\nUsage: install_oneapi_macos Fortran|C|C++.\n\n"
+    exit 1
+fi
+
+# URL for the offline installer of Intel OneAPI compiler and the components to install. For the URL,
+# see
+# https://www.intel.com/content/www/us/en/developer/articles/tool/oneapi-standalone-components.html
+if [[ "$LG" = "fortran" ]] ; then
+    URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/19106/m_fortran-compiler-classic_p_2023.0.0.25379_offline.dmg
+    COMPONENTS=intel.oneapi.mac.ifort-compiler
+elif [[ "$LG" = "c" || "$LG" = "cpp" || "$LG" = "c++" ]] ; then
+    URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/19097/m_cpp-compiler-classic_p_2023.0.0.25429_offline.dmg
+    COMPONENTS=intel.oneapi.mac.cpp-compiler
+fi
+
+# Download the installer. curl is included by default in macOS.
+cd "$TMPDIR" || exit 2
 curl --output webimage.dmg --url "$URL" --retry 5 --retry-delay 5
 hdiutil attach webimage.dmg
 
@@ -25,13 +43,21 @@ installer_exit_code=$?
 source /opt/intel/oneapi/setvars.sh
 
 # Show the result of the installation.
-echo "The latest ifort installed is:"
-ifort --version
-echo "The path to ifort is:"
-command -v ifort
+if [[ "$LG" = "fortran" ]] ; then
+    echo "The latest ifort installed is:"
+    ifort --version
+    echo "The path to ifort is:"
+    command -v ifort
+else
+    echo "The latest icc installed is:"
+    icc --version
+    echo "The path to icc is:"
+    command -v icc
+fi
 
 # Remove the installer
-hdiutil detach /Volumes/"$(basename "$URL" .dmg)" -quiet
 rm webimage.dmg
+hdiutil detach /Volumes/"$(basename "$URL" .dmg)" -quiet
 
+# Exit with the installer exit code.
 exit $installer_exit_code

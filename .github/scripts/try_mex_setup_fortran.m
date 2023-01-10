@@ -31,8 +31,8 @@ catch exception
     % Do nothing
 end
 % If MEX setup fails on macOS or Windows, it is probably because of failing to find a supported
-% compiler. On MATLAB 2022a or above, MEX can be set up using the Fortran compiler in Intel OneAPI, 
-% which is available for free. ONEAPI_ROOT to the default values and 
+% compiler. On MATLAB 2022a or above, MEX can be set up using the Fortran compiler in Intel OneAPI,
+% which is available for free. ONEAPI_ROOT to the default values and
 if (ismac || (ispc && ~isunix)) && (~isempty(exception) || mex_setup ~= 0)
     old_oneapi_root = getenv('ONEAPI_ROOT');
     if ismac

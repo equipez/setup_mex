@@ -1,0 +1,68 @@
+name: Test MEX, Fortran
+
+on:
+  # Trigger the workflow on push or pull request
+  push:
+  # Trigger the workflow by cron. The default time zone of GitHub Actions is UTC.
+  schedule:
+    - cron: '0 20 * * 6'
+  # Trigger the workflow when it is manually triggered
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test MEX
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-11] #, macos-latest, windows-2019, windows-latest]
+        matlab: [latest] #[R2020a, R2020b, R2021a, R2021b, R2022a, latest]
+        lang: [C, C++]
+        exclude:
+          - os: windows-2019
+            matlab: R2020a
+          - os: windows-2019
+            matlab: R2020b
+          - os: windows-latest
+            matlab: R2020a
+          - os: windows-latest
+            matlab: R2020b
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Install Intel oneAPI on macOS
+        if: startsWith(matrix.os, 'macos')
+        run: sudo bash .github/scripts/install_oneapi_macos.sh ${{ matrix.lang }}
+
+      - name: Install Intel oneAPI on Windows
+        if: startsWith(matrix.os, 'windows')
+        run: cmd.exe "/K" '".github/scripts/install_oneapi_windows.bat" && powershell'
+
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v1.1.0
+        with:
+          release: ${{ matrix.matlab }}
+
+      - name: Run script
+        uses: matlab-actions/run-command@v1
+        with:
+          command: |
+            if ismac
+                oneapi_root = '/opt/intel/oneapi/';
+                ifort_compiler18 = [oneapi_root, 'compiler/latest/mac/'];
+            elseif ispc && ~isunix  % Windows
+                oneapi_root = 'C:\Program Files (x86)\Intel\oneAPI\';
+                ifort_compiler18 = [oneapi_root, 'compiler\latest\windows\'];
+            end
+            ifort_path = [ifort_compiler18, 'bin/intel64/'];
+            setenv('ONEAPI_ROOT', oneapi_root);
+            setenv('IFORT_COMPILER18', ifort_compiler18);
+            setenv('PATH', [getenv('PATH'), ':', ifort_path]);
+
+            mex('-setup', '-v', '${{ matrix.lang }}');
+            %mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
+            mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.c'));
+            timestwo(1)

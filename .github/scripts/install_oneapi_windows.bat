@@ -13,7 +13,7 @@ set URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/19107/w_fort
 :: Component to install.
 set COMPONENTS=intel.oneapi.win.ifort-compiler
 
-:: Download the installer.
+:: Download the installer. curl is included by default in Windows since Windows 10, version 1803.
 cd %Temp%
 curl.exe --output webimage.exe --url %URL% --retry 5 --retry-delay 5
 start /b /wait webimage.exe -s -x -f webimage_extracted --log extract.log
@@ -36,7 +36,8 @@ ifx.exe /help
 echo The path to ifx is:
 where ifx.exe
 
-:: Remove the `webimage_extracted` directory.
+:: Remove the installer.
+del webimage.exe
 rd /s/q "webimage_extracted"
 
 :: Exit with the installer exit code.
