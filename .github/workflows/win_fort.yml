@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-2019, windows-latest]
-        matlab: [R20R20a, R20R20b, R2021a, R2021b, R2022a, latest]
+        matlab: [R2021a, R2021b, R2022a, latest]
 
     steps:
       - name: Check out repository
@@ -39,6 +39,7 @@ jobs:
         with:
           command: |
             setenv('ONEAPI_ROOT', 'C:\Program Files (x86)\Intel\oneAPI');  % Needed.
+            setenv('IFORT_COMPILER18', [getenv(ONEAPI_ROOT), '\compiler\latest\windows\bin\intel64\ifort.exe'])
             mex('-setup', '-v', 'FORTRAN');
             mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
             timestwo(1)
