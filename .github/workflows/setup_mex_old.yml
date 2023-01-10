@@ -2,7 +2,7 @@ name: Test MEX
 
 on:
   # Trigger the workflow on push or pull request
-  push:
+  #push:
   # Trigger the workflow by cron. The default time zone of GitHub Actions is UTC.
   schedule:
     - cron: '0 20 * * 6'
@@ -50,9 +50,33 @@ jobs:
         with:
           release: ${{ matrix.matlab }}
 
-      - name: Run test
+      - name: Run the test
         uses: matlab-actions/run-command@v1
         with:
           command: |
             lang = upper('${{ matrix.lang }}');
-            try_mex_setup(lang);
+
+            if strcmpi(lang, 'Fortran')
+                if ismac
+                    oneapi_root = '/opt/intel/oneapi/';
+                    ifort_compiler18 = [oneapi_root, 'compiler/latest/mac/'];
+                    ifort_path = fullfile(ifort_compiler18, 'bin', 'intel64');
+                    setenv('PATH', [getenv('PATH'), ':', ifort_path]);
+                elseif ispc && ~isunix  % Windows
+                    oneapi_root = 'C:\Program Files (x86)\Intel\oneAPI\';
+                    ifort_compiler18 = [oneapi_root, 'compiler\latest\windows\'];
+                    ifort_path = fullfile(ifort_compiler18, 'bin', 'intel64');
+                    setenv('PATH', [getenv('PATH'), ';', ifort_path]);  % Seems not needed.
+                end
+                setenv('ONEAPI_ROOT', oneapi_root);
+                setenv('IFORT_COMPILER18', ifort_compiler18);
+            end
+
+            mex('-setup', '-v', lang);
+
+            if strcmpi(lang, 'Fortran')
+                mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
+            else
+                mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.c'));
+            end
+            timestwo(1)
