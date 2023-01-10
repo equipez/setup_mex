@@ -3,20 +3,13 @@
 # See https://github.com/oneapi-src/oneapi-ci
 # https://github.com/oneapi-src/oneapi-ci/blob/master/scripts/install_macos.sh
 #
+# OneAPI version: 2021.3.0
+#
 # Zaikun Zhang (www.zhangzk.net), January 9, 2023
 
 # URL for the offline installer of Intel OneAPI Fortran compiler. See
 # https://www.intel.com/content/www/us/en/developer/articles/tool/oneapi-standalone-components.html
-# Default: 2023.0.0
-URL="https://registrationcenter-download.intel.com/akdlm/irc_nas/19106/m_fortran-compiler-classic_p_2023.0.0.25379_offline.dmg"
-if [[ $# -ge 1 ]] ; then
-    if [[ $1 = "2022" ]] ; then
-        URL="https://registrationcenter-download.intel.com/akdlm/irc_nas/18866/m_HPCKit_p_2022.3.0.8685_offline.dmg"
-    fi
-    if [[ $1 = "2021" ]] ; then
-        URL="https://registrationcenter-download.intel.com/akdlm/irc_nas/17890/m_HPCKit_p_2021.3.0.3226_offline.dmg"
-    fi
-fi
+URL="https://registrationcenter-download.intel.com/akdlm/irc_nas/17890/m_HPCKit_p_2021.3.0.3226_offline.dmg"
 
 # Component to install.
 COMPONENTS=intel.oneapi.mac.ifort-compiler

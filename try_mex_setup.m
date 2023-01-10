@@ -108,7 +108,7 @@ if ~isempty(exception) || mex_setup ~= 0
     success = 0;
 
 
-    mex(-v, '-setup', language)
+    mex('-v', '-setup', language)
 
 
 else

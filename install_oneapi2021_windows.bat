@@ -2,13 +2,13 @@
 :: See https://github.com/oneapi-src/oneapi-ci
 :: https://github.com/oneapi-src/oneapi-ci/blob/master/scripts/install_windows.bat
 ::
-:: OneAPI version: 2023.0.0
+:: OneAPI version: 2021.3.0
 ::
 :: Zaikun Zhang (www.zhangzk.net), January 9, 2023
 
 :: URL for the offline installer of Intel OneAPI Fortran compiler. See
 :: https://www.intel.com/content/www/us/en/developer/articles/tool/oneapi-standalone-components.html
-set URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/17762/w_HPCKit_p_2021.2.0.2901_offline.exe
+set URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/17940/w_HPCKit_p_2021.3.0.3227_offline.exe
 
 :: Component to install.
 set COMPONENTS=intel.oneapi.win.ifort-compiler
