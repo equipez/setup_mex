@@ -1,4 +1,4 @@
-name: Test MEX, Fortran
+name: Test MEX
 
 on:
   # Trigger the workflow on push or pull request
@@ -18,7 +18,7 @@ jobs:
       matrix:
         os: [macos-11, macos-latest, windows-2019, windows-latest]
         matlab: [R2020a, R2020b, R2021a, R2021b, R2022a, latest]
-        lang: [C, C++]
+        lang: [C, Fortran]
         exclude:
           - os: windows-2019
             matlab: R2020a
@@ -28,18 +28,24 @@ jobs:
             matlab: R2020a
           - os: windows-latest
             matlab: R2020b
+          - os: windows-latest
+            matlab: R2021a
+            lang: C
+          - os: windows-latest
+            matlab: R2021b
+            lang: C
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      # - name: Install Intel oneAPI on macOS
-      #   if: startsWith(matrix.os, 'macos')
-          #run: sudo bash .github/scripts/install_oneapi_macos.sh ${{ matrix.lang }}
+       - name: Install Intel oneAPI on macOS for Fortran
+         if: startsWith(matrix.os, 'macos') && matrix.lang == "Fortran"
+          run: sudo bash .github/scripts/install_oneapi_macos.sh ${{ matrix.lang }}
 
-      # - name: Install Intel oneAPI on Windows
-      #   if: startsWith(matrix.os, 'windows')
-      #   run: cmd.exe "/K" '".github/scripts/install_oneapi_windows.bat" && powershell'
+       - name: Install Intel oneAPI on Windows for Fortran
+         if: startsWith(matrix.os, 'windows') && matrix.lang == "Fortran"
+         run: cmd.exe "/K" '".github/scripts/install_oneapi_windows.bat" && powershell'
 
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v1.1.0
