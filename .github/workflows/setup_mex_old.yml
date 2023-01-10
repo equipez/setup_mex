@@ -46,7 +46,7 @@ jobs:
         run: cmd.exe "/K" '"install_oneapi2021_windows.bat" && powershell'
 
       - name: Set up MATLAB
-        uses: matlab-actions/setup-matlab@v1.1.0
+        uses: matlab-actions/setup-matlab@v1.2.3
         with:
           release: ${{ matrix.matlab }}
 
