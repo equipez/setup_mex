@@ -30,20 +30,18 @@ jobs:
             matlab: R2020b
           - os: windows-latest
             matlab: R2021a
-            lang: C
           - os: windows-latest
             matlab: R2021b
-            lang: C
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
-       - name: Install Intel oneAPI on macOS for Fortran
-         if: startsWith(matrix.os, 'macos') && matrix.lang == "Fortran"
-          run: sudo bash .github/scripts/install_oneapi_macos.sh ${{ matrix.lang }}
+      - name: Install Intel oneAPI on macOS for Fortran
+        if: startsWith(matrix.os, 'macos') && matrix.lang == "Fortran"
+         run: sudo bash .github/scripts/install_oneapi_macos.sh
 
-       - name: Install Intel oneAPI on Windows for Fortran
+      - name: Install Intel oneAPI on Windows for Fortran
          if: startsWith(matrix.os, 'windows') && matrix.lang == "Fortran"
          run: cmd.exe "/K" '".github/scripts/install_oneapi_windows.bat" && powershell'
 
