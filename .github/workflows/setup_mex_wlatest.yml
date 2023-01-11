@@ -14,8 +14,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest]
-        matlab: [R2021a, R2021b, R2022a, R2022b, latest]
-        lang: [Fortran, C]
+        matlab: [R2022a, R2022b]
+        oneapi: [2021, 2022, 2023]
+        lang: [Fortran]
 
     steps:
       - name: Check out repository
