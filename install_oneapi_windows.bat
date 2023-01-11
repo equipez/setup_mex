@@ -12,14 +12,13 @@ if "%1"=="2022" (
     set URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/18857/w_HPCKit_p_2022.3.0.9564_offline.exe
 )
 if "%1"=="2021" (
-    set URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/17940/w_HPCKit_p_2021.3.0.3227_offline.exe
+    set URL=https://registrationcenter-download.intel.com/akdlm/irc_nas/18247/w_HPCKit_p_2021.4.0.3340_offline.exe
 )
 
 :: Component to install.
 set COMPONENTS=intel.oneapi.win.ifort-compiler
 
 :: Download the installer. curl is included by default in Windows since Windows 10, version 1803.
-cd %Temp%
 curl.exe --output webimage.exe --url %URL% --retry 5 --retry-delay 5
 start /b /wait webimage.exe -s -x -f webimage_extracted --log extract.log
 

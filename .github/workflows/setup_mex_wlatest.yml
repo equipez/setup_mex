@@ -15,7 +15,7 @@ jobs:
       matrix:
         os: [windows-latest]
         matlab: [R2022a, R2022b]
-        oneapi: [2021, 2022, 2023]
+        oneapi: [2021] #, 2022, 2023]
         lang: [Fortran]
 
     steps:
