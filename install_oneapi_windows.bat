@@ -19,11 +19,13 @@ if "%1"=="2021" (
 set COMPONENTS=intel.oneapi.win.ifort-compiler
 
 :: Download the installer. curl is included by default in Windows since Windows 10, version 1803.
+::cd %Temp%  :: CD does not work if %Temp% is on a different drive.
 curl.exe --output webimage.exe --url %URL% --retry 5 --retry-delay 5
 start /b /wait webimage.exe -s -x -f webimage_extracted --log extract.log
 
 :: Install the compiler.
-webimage_extracted\bootstrapper.exe -s --action install --components=%COMPONENTS% --eula=accept -p=NEED_VS2017_INTEGRATION=0 -p=NEED_VS2019_INTEGRATION=0 -p=NEED_VS2022_INTEGRATION=0 --log-dir=.
+::webimage_extracted\bootstrapper.exe -s --action install --components=%COMPONENTS% --eula=accept -p=NEED_VS2017_INTEGRATION=0 -p=NEED_VS2019_INTEGRATION=0 -p=NEED_VS2022_INTEGRATION=0 --log-dir=.
+webimage_extracted\bootstrapper.exe -s --action install --components=%COMPONENTS% --eula=accept -p=NEED_VS2017_INTEGRATION=0 -p=NEED_VS2019_INTEGRATION=0 --log-dir=.
 set installer_exit_code=%ERRORLEVEL%
 
 :: Run the script that sets the environment variables.
