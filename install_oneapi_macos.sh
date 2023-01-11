@@ -11,10 +11,10 @@
 URL="https://registrationcenter-download.intel.com/akdlm/irc_nas/19106/m_fortran-compiler-classic_p_2023.0.0.25379_offline.dmg"
 if [[ $# -ge 1 ]] ; then
     if [[ $1 = "2022" ]] ; then
-        URL="https://registrationcenter-download.intel.com/akdlm/irc_nas/18866/m_HPCKit_p_2022.3.0.8685_offline.dmg"
+        URL="https://registrationcenter-download.intel.com/akdlm/irc_nas/18977/m_HPCKit_p_2022.3.1.15344_offline.dmg"
     fi
     if [[ $1 = "2021" ]] ; then
-        URL="https://registrationcenter-download.intel.com/akdlm/irc_nas/17890/m_HPCKit_p_2021.3.0.3226_offline.dmg"
+        URL="https://registrationcenter-download.intel.com/akdlm/irc_nas/18242/m_HPCKit_p_2021.4.0.3389_offline.dmg"
     fi
 fi
 
