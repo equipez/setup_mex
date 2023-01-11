@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-11, macos-latest, windows-2019, windows-latest]
-        matlab: [R2020a, R2020b, R2021a, R2021b, R2022a, 2022b, latest]
+        matlab: [R2020a, R2020b, R2021a, R2021b, R2022a, R2022b, latest]
         oneapi: [2021, 2022, 2023]
         lang: [Fortran, C]
         exclude:
