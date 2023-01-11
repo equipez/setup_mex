@@ -20,7 +20,7 @@ jobs:
         # matlab: [R2020a, R2020b, R2021a, R2021b, R2022a, latest]
         # oneapi: [2021, 2022, 2023]
         # lang: [Fortran, C]
-        os: [windows-2019]
+        os: [macos-11]
         matlab: [latest]
         oneapi: [2023]
         lang: [Fortran]
@@ -44,7 +44,8 @@ jobs:
 
       - name: Install Intel oneAPI on macOS for Fortran
         if: startsWith(matrix.os, 'macos') && matrix.lang == 'Fortran'
-        run: sudo bash install_oneapi_macos.sh ${{ matrix.oneapi }}
+        run: sudo bash install_oneapi_macos.sh
+          #${{ matrix.oneapi }}
 
       - name: Install Intel oneAPI on Windows for Fortran
         if: startsWith(matrix.os, 'windows') && matrix.lang == 'Fortran'
