@@ -30,17 +30,18 @@ catch exception
     % Do nothing
 end
 
-% If MEX setup fails, it is probably because of failing to find a supported compiler.
-% See https://www.mathworks.com/support/requirements/supported-compilers.html.
-% On Linux, this is easy to fix and the user should be capable of handling it.
+% If MEX setup fails, it is probably because of failing to find a supported compiler. See
+% https://www.mathworks.com/support/requirements/supported-compilers.html. On Linux, it is easy to
+% fix and the user should be capable of handling it. So we focus on macOS and Windows.
 % For C/C++, it suffices to install "Xcode with Clang" on macOS and "Microsoft Visual C++"
 % (Microsoft Visual Studio with the "Desktop development with C++" workload) on Windows.
 % For Fortran, we need Xcode on macOS or Microsoft Visual Studio (maybe also with "Desktop
 % development with C++") on Windows, and additionally the Intel Fortran compiler with the
 % environment variables ONEAPI_ROOT or IFORT_COMPILER18/19/20 (as of R2020a-22b) set accordingly.
-% In the following, for Fortran, we set the environment variables ONEAPI_ROOT and IFORT_COMPILER18
+% In the following, for Fortran, we set the environment variables ONEAPI_ROOT and IFORT_COMPILER18.
 % This should make MEX setup work for Fortran on MATLAB 2020a or above if a **default** installation
 % of Intel OneAPI (available for free) has been done and Xcode or Microsoft VS is correctly installed.
+% Indeed, setting either ONEAPI_ROOT or IFORT_COMPILER18 would be sufficient.
 if strcmpi(language, 'FORTRAN') && (ismac || (ispc && ~isunix)) && (~isempty(exception) || mex_setup ~= 0)
 
     display '1st fail'

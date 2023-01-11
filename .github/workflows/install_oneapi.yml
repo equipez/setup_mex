@@ -2,7 +2,7 @@ name: Install Intel oneAPI
 
 on:
   # Trigger the workflow on push or pull request
-  push:
+  #push:
   # Trigger the workflow when it is manually triggered
   workflow_dispatch:
 
