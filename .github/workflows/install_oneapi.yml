@@ -22,4 +22,4 @@ jobs:
 
       - name: Install Intel oneAPI on Windows for Fortran
         if: startsWith(matrix.os, 'windows')
-        run: cmd.exe "/K" '"install_oneapi_windows.bat" ${{ matrix.oneapi }}'
+        run: cmd.exe '"install_oneapi_windows.bat" ${{ matrix.oneapi }}'
