@@ -18,7 +18,7 @@ if success == 1
 end
 
 orig_warning_state = warning;
-warning('off','all'); % We do not want to see warnings when verifying MEX
+warning('off','all'); % We do not want to see warnings
 
 % Try `mex('-setup', language)`
 mex_setup = -1;
@@ -58,17 +58,16 @@ if strcmpi(language, 'FORTRAN') && (ismac || (ispc && ~isunix)) && (~isempty(exc
     % Set PATH, ONEAPI_ROOT, and IFORT_COMPILER18.
     if ismac
         oneapi_root = '/opt/intel/oneapi/';
-        ifort_compiler18 = [oneapi_root, 'compiler/latest/mac/'];
-        ifort_path = fullfile(ifort_compiler18, 'bin', 'intel64');
-        setenv('PATH', [getenv('PATH'), ':', ifort_path]);
+        compiler_dir = [oneapi_root, 'compiler/latest/mac/'];
     elseif ispc && ~isunix  % Windows
         oneapi_root = 'C:\Program Files (x86)\Intel\oneAPI\';
-        ifort_compiler18 = [oneapi_root, 'compiler\latest\windows\'];
-        ifort_path = fullfile(ifort_compiler18, 'bin', 'intel64');
-        setenv('PATH', [getenv('PATH'), ';', ifort_path]);  % Seems not needed.
+        compiler_dir = [oneapi_root, 'compiler\latest\windows\'];
     end
+    compiler_bin = fullfile(compiler_dir, 'bin')
+    compiler_bin64 = fullfile(compiler_bin, 'intel64')
+    setenv('PATH', [getenv('PATH'), pathsep, compiler_bin, pathsep, compiler_bin64]);  % Not needed for Windows as of 2023.
     setenv('ONEAPI_ROOT', oneapi_root);
-    setenv('IFORT_COMPILER18', ifort_compiler18);
+    setenv('IFORT_COMPILER18', compiler_dir);
 
     getenv('PATH')
     getenv('ONEAPI_ROOT')
@@ -107,8 +106,8 @@ end
 
 if ~isempty(exception) || mex_setup ~= 0
     fprintf('\nYour MATLAB failed to run mex(''-setup'', ''%s'').', language);
-    fprintf('\nTo see the detailed error message, execute the following command:');
-    fprintf('\n\n  mex(''-v'', ''-setup'', ''%s'')\n\n', language)
+    fprintf('\nTo see the detailed error message, execute the following command:\n');
+    fprintf('\n  mex(''-v'', ''-setup'', ''%s'')\n', language)
     success = 0;
 
 
@@ -126,8 +125,9 @@ warning(orig_warning_state);
 return
 
 
-%--------------------------------------------------------------------------------------------------%
-%--------------------------------------------------------------------------------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 function success = mex_well_configured(language, verbose)
 %MEX_WELL_CONFIGURED verifies whether MEX is well configured by testing it on the official example.
 % At return,
@@ -139,7 +139,7 @@ function success = mex_well_configured(language, verbose)
 success = 1;
 
 orig_warning_state = warning;
-warning('off','all'); % We do not want to see warnings when verifying MEX
+warning('off','all'); % We do not want to see warnings
 
 callstack = dbstack;
 funname = callstack(1).name; % Name of the current function
@@ -184,14 +184,12 @@ catch exception
     % Do nothing
 end
 
-trash_files = files_with_wildcard(temp_mexdir, 'timestwo.*');
-
 if ~isempty(exception) || mex_status ~= 0
-    cellfun(@(filename) delete(filename), trash_files);  % Clean up the trash before returning
+    delete(fullfile(temp_mexdir, 'timestwo.*'));  % Remove the trash before returning
     if verbose
         fprintf('\nThe MEX of your MATLAB failed to compile\n%s,\nwhich is a MATLAB built-in example for trying MEX on %s.\n', example_file, language);
-        fprintf('\nTo see the detailed error message, execute the following command:');
-        fprintf('\n\n  mex(''-v'', fullfile(matlabroot, ''extern'', ''examples'', ''refbook'', ''%s''));\n\n', example_file_name);
+        fprintf('\nTo see the detailed error message, execute the following command:\n');
+        fprintf('\n  mex(''-v'', fullfile(matlabroot, ''extern'', ''examples'', ''refbook'', ''%s''));\n', example_file_name);
     end
     success = 0;
     return
@@ -207,7 +205,7 @@ catch exception
 end
 
 rmpath(temp_mexdir);  % Clean up the path before returning.
-cellfun(@(filename) delete(filename), trash_files);  % Clean up the trash before returning
+delete(fullfile(temp_mexdir, 'timestwo.*'));  % Remove the trash before returning
 
 if ~isempty(exception)
     if verbose
@@ -227,19 +225,4 @@ end
 % Restore the behavior of displaying warnings
 warning(orig_warning_state);
 
-return
-
-
-%--------------------------------------------------------------------------------------------------%
-%--------------------------------------------------------------------------------------------------%
-function full_files = files_with_wildcard(dir_name, wildcard_string)
-%FULL_FILES returns a cell array of files that match the wildcard_string
-% under dir_name.
-% MATLAB R2015b does not handle commands with wildcards like
-% delete(*.o)
-% or
-% mex(*.f)
-% This function provides a workaround.
-files = dir(fullfile(dir_name, wildcard_string));
-full_files = cellfun(@(s)fullfile(dir_name, s), {files.name}, 'uniformoutput', false);
 return
