@@ -13,12 +13,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2019, windows-latest]
+        os: [windows-2019, macos-11]
+        bitness: [32, 64]
         oneapi: [2021, 2022, 2023]
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
+
+      - name: Install Intel oneAPI on macOS for Fortran
+        if: startsWith(matrix.os, 'macos') && matrix.lang == 'Fortran'
+        run: sudo bash install_oneapi_macos.sh ${{ matrix.oneapi }}
 
       - name: Install Intel oneAPI on Windows for Fortran
         if: startsWith(matrix.os, 'windows')
