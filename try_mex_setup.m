@@ -88,7 +88,7 @@ if strcmpi(language, 'FORTRAN') && (ismac || (ispc && ~isunix)) && (~isempty(exc
 
         display '2nd fail'
 
-        setenv('ONEAPI_ROOT', oneapi_root_save);
+        %setenv('ONEAPI_ROOT', oneapi_root_save);
         setenv('IFORT_COMPILER18', ifort_compiler18_save);
         if exist('unsetenv', 'builtin')  % unsetenv is available since R2022b.
 
