@@ -11,9 +11,6 @@ function success = try_mex_setup(language)
 % up before, and because MEX setup may fail even if it succeeded before due to change of environment.
 success = mex_well_configured(language, false);  % verbose = false
 if success == 1
-
-    display '0th success'
-
     return
 end
 
@@ -44,16 +41,14 @@ end
 % Indeed, setting either ONEAPI_ROOT or IFORT_COMPILER18 would be sufficient.
 if strcmpi(language, 'FORTRAN') && (ismac || (ispc && ~isunix)) && (~isempty(exception) || mex_setup ~= 0)
 
-    display '1st fail'
-
     % Test whether the environment variables ONEAPI_ROOT and IFORT_COMPILER18 exist (isenv is
     % available since R2022b).
-    isenv_oneapi_root = ~exist('isenv', 'builtin') || isenv('ONEAPI_ROOT')
-    isenv_ifort_compiler18 = ~exist('isenv', 'builtin') || isenv('IFORT_COMPILER18')
+    isenv_oneapi_root = ~exist('isenv', 'builtin') || isenv('ONEAPI_ROOT');
+    isenv_ifort_compiler18 = ~exist('isenv', 'builtin') || isenv('IFORT_COMPILER18');
 
     % Get the values of ONEAPI_ROOT and IFORT_COMPILER18; the value is empty in case of nonexistence.
-    oneapi_root_save = getenv('ONEAPI_ROOT')
-    ifort_compiler18_save = getenv('IFORT_COMPILER18')
+    oneapi_root_save = getenv('ONEAPI_ROOT');
+    ifort_compiler18_save = getenv('IFORT_COMPILER18');
 
     % Set PATH, ONEAPI_ROOT, and IFORT_COMPILER18.
     if ismac
@@ -63,15 +58,11 @@ if strcmpi(language, 'FORTRAN') && (ismac || (ispc && ~isunix)) && (~isempty(exc
         oneapi_root = 'C:\Program Files (x86)\Intel\oneAPI\';
         compiler_dir = [oneapi_root, 'compiler\latest\windows\'];
     end
-    compiler_bin = fullfile(compiler_dir, 'bin')
-    compiler_bin64 = fullfile(compiler_bin, 'intel64')
+    compiler_bin = fullfile(compiler_dir, 'bin');
+    compiler_bin64 = fullfile(compiler_bin, 'intel64');  % Why not worry about 32-bit case? Since R2016a, MATLAB has been 64-bit only.
     setenv('PATH', [getenv('PATH'), pathsep, compiler_bin, pathsep, compiler_bin64]);  % Not needed for Windows as of 2023.
     setenv('ONEAPI_ROOT', oneapi_root);
     setenv('IFORT_COMPILER18', compiler_dir);
-
-    getenv('PATH')
-    getenv('ONEAPI_ROOT')
-    getenv('IFORT_COMPILER18')
 
     % Try setting up MEX again.
     mex_setup = -1;
@@ -85,15 +76,9 @@ if strcmpi(language, 'FORTRAN') && (ismac || (ispc && ~isunix)) && (~isempty(exc
 
     % If the setup fails again, give up after restoring ONEAPI_ROOT and IFORT_COMPILER18.
     if ~isempty(exception) || mex_setup ~= 0
-
-        display '2nd fail'
-
         setenv('ONEAPI_ROOT', oneapi_root_save);
         setenv('IFORT_COMPILER18', ifort_compiler18_save);
         if exist('unsetenv', 'builtin')  % unsetenv is available since R2022b.
-
-            display 'unset'
-
             if ~isenv_oneapi_root
                 unsetenv('ONEAPI_ROOT');
             end
@@ -109,11 +94,6 @@ if ~isempty(exception) || mex_setup ~= 0
     fprintf('\nTo see the detailed error message, execute the following command:\n');
     fprintf('\n  mex(''-v'', ''-setup'', ''%s'')\n', language)
     success = 0;
-
-
-    mex('-v', '-setup', language)
-
-
 else
     % Try `mex(example_file)`
     success = mex_well_configured(language, true);  % verbose = true
