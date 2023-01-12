@@ -9,8 +9,9 @@ This package provides scripts that attempt to facilitate setting up the
 [MATLAB MEX](https://www.mathworks.com/help/matlab/ref/mex.html) on macOS or Windows.
 The setup on Linux is trivial and Linuxers should be capable of handling it half asleep.
 
-Whether the methods here will work or not, it depends on the configuration of your system and your MATLAB.
-It does not hurt to try.
+Whether the method here works or not, it depends on the configuration of your system and your MATLAB.
+Trying will not hurt. In case it fails, you need to consult a local MATLAB expert or the technical support
+of MathWorks about ["how to set up MEX"](https://www.mathworks.com/help/matlab/ref/mex.html).
 
 ## Remarks
 
