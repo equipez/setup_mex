@@ -15,10 +15,10 @@ of MathWorks about ["how to set up MEX"](https://www.mathworks.com/help/matlab/r
 
 ## Remarks
 
-1. Always adopt the default options (e.g., installation directory) when installing Xcode or
+1. Always adopt the **default options** (e.g., installation directory) when installing Xcode or
    Microsoft Visual Studio. Otherwise, MATLAB may not be able to locate them.
 
-2. Choose the version of Xcode or Microsoft Visual Studio according to the version of your
+2. Choose the version of Xcode or Microsoft Visual Studio according to that of your
    MATLAB, following [the official documentation of MathWorks](https://www.mathworks.com/support/requirements/supported-compilers.html).
    The latest version does not necessarily work.
 
@@ -29,7 +29,7 @@ change the directory to the folder of the repository.
 
 ### macOS
 
-- To compile C MEX files
+- C
 
     - Install Xcode with Clang
     - In MATLAB, run
@@ -37,7 +37,7 @@ change the directory to the folder of the repository.
     try_mex_setup('C')
     ```
 
-- To compile Fortran MEX files
+- Fortran
 
     - Install Xcode with Clang
     - In terminal, run
@@ -51,7 +51,7 @@ change the directory to the folder of the repository.
 
 ### Windows
 
-- To compile C MEX files
+- C
 
     - Install Microsoft Visual Studio with the "Desktop development with C++" workload
     - In MATLAB, run
@@ -59,7 +59,7 @@ change the directory to the folder of the repository.
     try_mex_setup('C')
     ```
 
-- To compile Fortran MEX files
+- Fortran
 
     - Install Microsoft Visual Studio with the "Desktop development with C++" workload
     - In cmd, run
