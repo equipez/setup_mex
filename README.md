@@ -24,46 +24,48 @@ It does not hurt to try.
 Before starting, clone this repository, open your terminal (on macOS) or cmd (on Windows), and
 change the directory to the folder of the repository.
 
-## macOS
+## How
 
-### To compile C MEX files
+### macOS
 
-- Install Xcode with Clang
-- In MATLAB, run
-```
-try_mex_setup('C')
-```
+- To compile C MEX files
 
-### To compile Fortran MEX files
+    - Install Xcode with Clang
+    - In MATLAB, run
+    ```
+    try_mex_setup('C')
+    ```
 
-- Install Xcode with Clang
-- In terminal, run
-```
-sudo bash install_oneapi_macos.sh
-```
-- In MATLAB, run
-```
-try_mex_setup('Fortran')
-```
+- To compile Fortran MEX files
 
-## Windows
+    - Install Xcode with Clang
+    - In terminal, run
+    ```
+    sudo bash install_oneapi_macos.sh
+    ```
+    - In MATLAB, run
+    ```
+    try_mex_setup('Fortran')
+    ```
 
-### To compile C MEX files
+### Windows
 
-- Install Microsoft Visual Studio with the "Desktop development with C++" workload
-- In MATLAB, run
-```
-try_mex_setup('C')
-```
+- To compile C MEX files
 
-### To compile Fortran MEX files
+    - Install Microsoft Visual Studio with the "Desktop development with C++" workload
+    - In MATLAB, run
+    ```
+    try_mex_setup('C')
+    ```
 
-- Install Microsoft Visual Studio with the "Desktop development with C++" workload
-- In cmd, run
-```
-install_oneapi_windows.bat
-```
-- In MATLAB, run
-```
-try_mex_setup('Fortran')
-```
+- To compile Fortran MEX files
+
+    - Install Microsoft Visual Studio with the "Desktop development with C++" workload
+    - In cmd, run
+    ```
+    install_oneapi_windows.bat
+    ```
+    - In MATLAB, run
+    ```
+    try_mex_setup('Fortran')
+    ```
