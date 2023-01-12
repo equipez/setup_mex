@@ -16,7 +16,7 @@ jobs:
         os: [windows-latest]
         matlab: [R2022a, R2022b]
         oneapi: [2021] #, 2022, 2023]
-        lang: [Fortran]
+        lang: [Fortran] #, C]
 
     steps:
       - name: Check out repository
@@ -35,7 +35,7 @@ jobs:
         uses: matlab-actions/run-command@v1
         with:
           command: |
-            lang = upper('${{ matrix.lang }}');
+            lang = '${{ matrix.lang }}';
 
             if strcmpi(lang, 'Fortran')
                 oneapi_root = 'C:\Program Files (x86)\Intel\oneAPI\';

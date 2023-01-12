@@ -13,22 +13,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2019, macos-11]
-        bitness: [32, 64]
+        os: [windows-latest]
         oneapi: [2021, 2022, 2023]
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
-
-      - name: find bitness macOS
-        if: startsWith(matrix.os, 'macos')
-        run:  uname -a && uname -m
-
-      - name: find bitness Windows
-        if: startsWith(matrix.os, 'windows')
-        run:  wmic os get osarchitecture
-
 
       - name: Install Intel oneAPI on macOS for Fortran
         if: startsWith(matrix.os, 'macos')
