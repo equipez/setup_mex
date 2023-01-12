@@ -22,10 +22,10 @@ of MathWorks about ["how to set up MEX"](https://www.mathworks.com/help/matlab/r
    MATLAB, following [the official documentation of MathWorks](https://www.mathworks.com/support/requirements/supported-compilers.html).
    The latest version does not necessarily work.
 
+## How
+
 Before starting, clone this repository, open your terminal (on macOS) or cmd (on Windows), and
 change the directory to the folder of the repository.
-
-## How
 
 ### macOS
 
