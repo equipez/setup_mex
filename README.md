@@ -63,7 +63,7 @@ change the directory to the folder of the repository.
 - Fortran
 
     - Install Microsoft Visual Studio with the "Desktop development with C++" workload
-    - In **cmd** (not Power Shell), run
+    - In **cmd** (not [PowerShell](https://en.wikipedia.org/wiki/PowerShell)), run
     ```
     install_oneapi_windows.bat
     ```

@@ -3,7 +3,7 @@
 :: https://github.com/oneapi-src/oneapi-ci/blob/master/scripts/install_windows.bat
 ::
 :: Usage: cmd.exe "/K" '"install_oneapi_windows.bat"'
-:: N.B.: This is a cmd script, which may not work in Power Shell.
+:: N.B.: This is a cmd script, which may not work in PowerShell.
 ::
 :: Zaikun Zhang (www.zhangzk.net), January 9, 2023
 
