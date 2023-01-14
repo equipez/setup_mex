@@ -24,7 +24,8 @@ of MathWorks about ["how to set up MEX"](https://www.mathworks.com/help/matlab/r
 
 ## How
 
-Before starting, clone this repository, open your terminal (on macOS) or cmd (on Windows), and
+Before starting, clone this repository, open your [terminal on macOS](https://en.wikipedia.org/wiki/List_of_macOS_built-in_apps#Terminal)
+or [cmd on Windows](https://en.wikipedia.org/wiki/Cmd.exe), and
 change the directory to the folder of the repository.
 
 ### macOS
@@ -62,7 +63,7 @@ change the directory to the folder of the repository.
 - Fortran
 
     - Install Microsoft Visual Studio with the "Desktop development with C++" workload
-    - In cmd, run
+    - In **cmd** (not Power Shell), run
     ```
     install_oneapi_windows.bat
     ```
