@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
-      max-parallel: 60
+      max-parallel: 50
       matrix:
         os: [windows-2019, windows-latest, macos-11, macos-latest]
         matlab: [R2020a, R2020b, R2021a, R2021b, R2022a, R2022b]
