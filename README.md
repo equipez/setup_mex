@@ -16,16 +16,14 @@ of MathWorks about ["how to set up MEX"](https://www.mathworks.com/help/matlab/r
 
 ## How
 
-Before starting, clone this repository, open your [terminal on macOS](https://en.wikipedia.org/wiki/List_of_macOS_built-in_apps#Terminal)
-or [cmd on Windows](https://en.wikipedia.org/wiki/Cmd.exe), and
-change the directory to the folder of the repository.
+Before starting, clone this repository. Then do the following according to your system (macOS or Windows) and your need (C or Fortran). 
 
 ### macOS
 
 - C
 
     - Install Xcode with Clang
-    - In MATLAB, run
+    - In MATLAB, change the directory to the folder of the repository, run
     ```
     try_mex_setup('C')
     ```
@@ -33,11 +31,11 @@ change the directory to the folder of the repository.
 - Fortran
 
     - Install Xcode with Clang
-    - In terminal, run
+    - In [terminal]((https://en.wikipedia.org/wiki/List_of_macOS_built-in_apps#Terminal)), change the directory to the folder of the repository, run
     ```
     sudo bash install_oneapi_macos.sh
     ```
-    - In MATLAB, run
+    - In MATLAB, change the directory to the folder of the repository, run
     ```
     try_mex_setup('Fortran')
     ```
@@ -47,7 +45,7 @@ change the directory to the folder of the repository.
 - C
 
     - Install Microsoft Visual Studio with the "Desktop development with C++" workload
-    - In MATLAB, run
+    - In MATLAB, change the directory to the folder of the repository, run
     ```
     try_mex_setup('C')
     ```
@@ -55,7 +53,7 @@ change the directory to the folder of the repository.
 - Fortran
 
     - Install Microsoft Visual Studio with the "Desktop development with C++" workload
-    - In [**cmd**](https://en.wikipedia.org/wiki/Cmd.exe) (not [PowerShell](https://en.wikipedia.org/wiki/PowerShell)), run
+    - In [**cmd**](https://en.wikipedia.org/wiki/Cmd.exe) (not [PowerShell](https://en.wikipedia.org/wiki/PowerShell)),  change the directory to the folder of the repository, run
     ```
     install_oneapi_windows.bat
     ```
