@@ -14,15 +14,6 @@ Whether the method here works or not, it depends on the configuration of your sy
 Trying will not hurt. In case it fails, you need to consult a local MATLAB expert or the technical support
 of MathWorks about ["how to set up MEX"](https://www.mathworks.com/help/matlab/ref/mex.html).
 
-## Remarks
-
-1. Always adopt the **default options** (e.g., installation directory) when installing Xcode (on macOS) or
-   Microsoft Visual Studio (on Windows). Otherwise, MATLAB may not be able to locate them.
-
-2. Choose the version of Xcode or Microsoft Visual Studio according to that of your
-   MATLAB, following [the official documentation of MathWorks](https://www.mathworks.com/support/requirements/supported-compilers.html).
-   The latest version does not necessarily work.
-
 ## How
 
 Before starting, clone this repository, open your [terminal on macOS](https://en.wikipedia.org/wiki/List_of_macOS_built-in_apps#Terminal)
@@ -72,3 +63,12 @@ change the directory to the folder of the repository.
     ```
     try_mex_setup('Fortran')
     ```
+
+## Remarks
+
+1. Always adopt the **default options** (e.g., installation directory) when installing Xcode (on macOS) or
+   Microsoft Visual Studio (on Windows). Otherwise, MATLAB may not be able to locate them.
+
+2. Choose the version of Xcode or Microsoft Visual Studio according to that of your
+   MATLAB, following [the official documentation of MathWorks](https://www.mathworks.com/support/requirements/supported-compilers.html).
+   The latest version does not necessarily work.
