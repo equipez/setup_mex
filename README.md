@@ -57,7 +57,7 @@ Before starting, clone this repository. Then do the following according to your 
     ```
     install_oneapi_windows.bat
     ```
-    - In MATLAB, run
+    - In MATLAB, change the directory to the folder of the repository, run
     ```
     try_mex_setup('Fortran')
     ```
