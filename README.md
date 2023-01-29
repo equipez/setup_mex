@@ -6,7 +6,9 @@
 ## What
 
 This package provides scripts that attempt to facilitate setting up the
-[MATLAB MEX](https://www.mathworks.com/help/matlab/ref/mex.html) on macOS or Windows.
+[MATLAB MEX](https://www.mathworks.com/help/matlab/ref/mex.html) on macOS or Windows. 
+For Fortran, it will install (automatically) the Fortran compiler from [Intel oneAPI]
+(https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html), available free of charge.
 The setup on Linux is trivial and Linuxers should be capable of handling it half asleep.
 
 Whether the method here works or not, it depends on the configuration of your system and your MATLAB.
@@ -45,7 +47,6 @@ change the directory to the folder of the repository.
     ```
     sudo bash install_oneapi_macos.sh
     ```
-    It will install the Fortran compiler from [Intel oneAPI](https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html), available free of charge. 
     - In MATLAB, run
     ```
     try_mex_setup('Fortran')
@@ -68,7 +69,6 @@ change the directory to the folder of the repository.
     ```
     install_oneapi_windows.bat
     ```
-    It will install the Fortran compiler from [Intel oneAPI](https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html), available free of charge. 
     - In MATLAB, run
     ```
     try_mex_setup('Fortran')
