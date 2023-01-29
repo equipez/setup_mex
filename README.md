@@ -31,7 +31,7 @@ Before starting, clone this repository. Then do the following according to your 
 - Fortran
 
     - Install Xcode with Clang
-    - In [terminal]((https://en.wikipedia.org/wiki/List_of_macOS_built-in_apps#Terminal)), change the directory to the folder of the repository, run
+    - In [terminal](https://support.apple.com/en-hk/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac), change the directory to the folder of the repository, run
     ```
     sudo bash install_oneapi_macos.sh
     ```
