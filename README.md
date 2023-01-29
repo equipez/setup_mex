@@ -15,8 +15,8 @@ of MathWorks about ["how to set up MEX"](https://www.mathworks.com/help/matlab/r
 
 ## Remarks
 
-1. Always adopt the **default options** (e.g., installation directory) when installing Xcode or
-   Microsoft Visual Studio. Otherwise, MATLAB may not be able to locate them.
+1. Always adopt the **default options** (e.g., installation directory) when installing Xcode (on macOS) or
+   Microsoft Visual Studio (on Windows). Otherwise, MATLAB may not be able to locate them.
 
 2. Choose the version of Xcode or Microsoft Visual Studio according to that of your
    MATLAB, following [the official documentation of MathWorks](https://www.mathworks.com/support/requirements/supported-compilers.html).
@@ -45,6 +45,7 @@ change the directory to the folder of the repository.
     ```
     sudo bash install_oneapi_macos.sh
     ```
+    It will install the Fortran compiler from [Intel oneAPI](https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html), available free of charge. 
     - In MATLAB, run
     ```
     try_mex_setup('Fortran')
@@ -63,10 +64,11 @@ change the directory to the folder of the repository.
 - Fortran
 
     - Install Microsoft Visual Studio with the "Desktop development with C++" workload
-    - In **cmd** (not [PowerShell](https://en.wikipedia.org/wiki/PowerShell)), run
+    - In [**cmd**](https://en.wikipedia.org/wiki/Cmd.exe) (not [PowerShell](https://en.wikipedia.org/wiki/PowerShell)), run
     ```
     install_oneapi_windows.bat
     ```
+    It will install the Fortran compiler from [Intel oneAPI](https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html), available free of charge. 
     - In MATLAB, run
     ```
     try_mex_setup('Fortran')
