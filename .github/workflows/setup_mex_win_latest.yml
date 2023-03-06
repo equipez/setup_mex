@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.3.0
 
       - name: Install Intel oneAPI on Windows for Fortran
         if: startsWith(matrix.os, 'windows') && matrix.lang == 'Fortran'
@@ -32,7 +32,7 @@ jobs:
           release: ${{ matrix.matlab }}
 
       - name: Run the test
-        uses: matlab-actions/run-command@v1
+        uses: matlab-actions/run-command@v1.1.3
         with:
           command: |
             lang = '${{ matrix.lang }}';
