@@ -1,4 +1,4 @@
-function success = try_mex_setup(language)
+function success = try_mex_setup(language, verbose)
 %TRY_MEX_SETUP tries running MEX setup for compiling language.
 % At return,
 % success = 1 means MEX is correctly set up.
@@ -7,9 +7,11 @@ function success = try_mex_setup(language)
 % file because such a file is not found, or the MEX file of the example file works but the result
 % is incorrect.
 
+verbose = (nargin >=2 && verbose);
+
 % Return if MEX is already well configured. This is important, because MEX is usable if it was set
 % up before, and because MEX setup may fail even if it succeeded before due to change of environment.
-success = mex_well_configured(language, false);  % verbose = false
+success = mex_well_configured(language);  % verbose = false
 if success == 1
     return
 end
@@ -22,8 +24,7 @@ mex_setup = -1;
 exception = [];
 try
     %[~, mex_setup] = evalc('mex(''-setup'', language)'); % Use evalc so that no output will be displayed
-    %mex_setup = mex('-setup', language); % mex -setup may be interactive. So it is not good to mute it completely!!!
-    mex_setup = mex('-v', '-setup', language); % mex -setup may be interactive. So it is not good to mute it completely!!!
+    mex_setup = mex('-setup', language); % mex -setup may be interactive. So it is not good to mute it completely!!!
 catch exception
     % Do nothing
 end
@@ -52,7 +53,7 @@ if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || me
     % Set PATH.
     compiler_bin = fullfile(compiler_dir, 'bin');
     compiler_bin64 = fullfile(compiler_bin, 'intel64');  % Why not worry about 32-bit case? Since R2016a, MATLAB has been 64-bit only.
-    setenv('PATH', [getenv('PATH'), pathsep, compiler_bin, pathsep, compiler_bin64])  % Not needed for Windows as of 2023.
+    setenv('PATH', [getenv('PATH'), pathsep, compiler_bin, pathsep, compiler_bin64]);  % Not needed for Windows as of 2023.
 
     % Set IFORT_COMPILER18, IFORT_COMPILER19, ..., IFORT_COMPILERCURRENT, ONEAPI_ROOT.
     first_year = 18;
@@ -87,13 +88,17 @@ if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || me
     exception = [];
     try
         %[~, mex_setup] = evalc('mex(''-setup'', language)'); % Use evalc so that no output will be displayed
-        %mex_setup = mex('-setup', language); % mex -setup may be interactive. So it is not good to mute it completely!!!
-        mex_setup = mex('-v', '-setup', language); % mex -setup may be interactive. So it is not good to mute it completely!!!
+        % mex -setup may be interactive. So it is not good to mute it completely!!!
+        if verbose
+            mex_setup = mex('-v', '-setup', language);
+        else
+            mex_setup = mex('-setup', language);
+        end
     catch exception
         % Do nothing
     end
 
-    % If the setup fails again, give up after restoring ONEAPI_ROOT and IFORT_COMPILER23.
+    % If the setup fails again, give up after restoring the environment variables.
     if ~isempty(exception) || mex_setup ~= 0
         for ienvvar = 1 : length(envvars)
             envvar = envvars{ienvvar};
@@ -132,6 +137,8 @@ function success = mex_well_configured(language, verbose)
 % success = 0 means MEX cannot compile the example or the resultant MEX file does not work.
 % success = -1 means either we cannot try MEX on the example file because such a file is not found,
 % or the MEX file of the example file works but the result is incorrect.
+
+verbose = (nargin >=2 && verbose);
 
 success = 1;
 
