@@ -20,7 +20,6 @@ warning('off','all'); % We do not want to see warnings
 % Try `mex('-setup', language)`
 mex_setup = -1;
 exception = [];
-1
 try
     %[~, mex_setup] = evalc('mex(''-setup'', language)'); % Use evalc so that no output will be displayed
     %mex_setup = mex('-setup', language); % mex -setup may be interactive. So it is not good to mute it completely!!!
@@ -28,9 +27,6 @@ try
 catch exception
     % Do nothing
 end
-
-2
-mex_setup
 
 % If MEX setup fails, it is probably because of failing to find a supported compiler. See
 % https://www.mathworks.com/support/requirements/supported-compilers.html. On Linux, it is easy to
@@ -60,7 +56,7 @@ if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || me
 
     % Set IFORT_COMPILER18, IFORT_COMPILER19, ..., IFORT_COMPILERCURRENT, ONEAPI_ROOT.
     first_year = 18;
-    current_year = year(datetime()) - 2000
+    current_year = year(datetime()) - 2000;
     nyear = current_year - first_year + 1;
     envvars = cell(1, nyear + 1);
     envvars_save = cell(1, nyear + 1);
@@ -72,9 +68,9 @@ if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || me
     envvars{end} = 'ONEAPI_ROOT';
 
     for ienvvar = 1 : length(envvars)
-        envvar = envvars{ienvvar}
+        envvar = envvars{ienvvar};
         % Test whether the environment variable exists (isenv is available since R2022b).
-        isenvs(ienvvar) = ~exist('isenv', 'builtin') || isenv(envvar)
+        isenvs(ienvvar) = ~exist('isenv', 'builtin') || isenv(envvar);
         % Save the value of the environment variable; the value is empty in case of nonexistence.
         envvars_save{ienvvar} = getenv(envvar);
         % Set the environment variable.
@@ -86,7 +82,6 @@ if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || me
         getenv(envvar)
     end
 
-    3
     % Try setting up MEX again.
     mex_setup = -1;
     exception = [];
@@ -97,12 +92,11 @@ if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || me
     catch exception
         % Do nothing
     end
-    4
 
     % If the setup fails again, give up after restoring ONEAPI_ROOT and IFORT_COMPILER23.
     if ~isempty(exception) || mex_setup ~= 0
         for ienvvar = 1 : length(envvars)
-            envvar = envvars{ienvvar}
+            envvar = envvars{ienvvar};
             setenv(envvar, envvars_save{ienvvar});
             getenv(envvar)
             if exist('unsetenv', 'builtin') && ~isenvs(ienvvar)  % unsetenv is available since R2022b.
