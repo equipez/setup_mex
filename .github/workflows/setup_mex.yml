@@ -39,6 +39,10 @@ jobs:
             matlab: R2021a
           - os: windows-latest
             matlab: R2021b
+          - os: windows-latest
+            matlab: R2022a
+          - os: windows-latest
+            matlab: R2022b
 
     steps:
       - name: Check out repository
