@@ -20,9 +20,11 @@ warning('off','all'); % We do not want to see warnings
 % Try `mex('-setup', language)`
 mex_setup = -1;
 exception = [];
+1
 try
     %[~, mex_setup] = evalc('mex(''-setup'', language)'); % Use evalc so that no output will be displayed
-    mex_setup = mex('-setup', language); % mex -setup may be interactive. So it is not good to mute it completely!!!
+    %mex_setup = mex('-setup', language); % mex -setup may be interactive. So it is not good to mute it completely!!!
+    mex_setup = mex('-v', '-setup', language); % mex -setup may be interactive. So it is not good to mute it completely!!!
 catch exception
     % Do nothing
 end
@@ -39,7 +41,7 @@ end
 % This should make MEX setup work for Fortran on MATLAB 2020a or above if a **default** installation
 % of Intel OneAPI (available for free) has been done and Xcode or Microsoft VS is correctly installed.
 % Indeed, setting either ONEAPI_ROOT or IFORT_COMPILER18 would be sufficient.
-if strcmpi(language, 'FORTRAN') && (ismac || (ispc && ~isunix)) && (~isempty(exception) || mex_setup ~= 0)
+if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || mex_setup ~= 0)
 
     % Test whether the environment variables ONEAPI_ROOT and IFORT_COMPILER18 exist (isenv is
     % available since R2022b).
@@ -54,25 +56,29 @@ if strcmpi(language, 'FORTRAN') && (ismac || (ispc && ~isunix)) && (~isempty(exc
     if ismac
         oneapi_root = '/opt/intel/oneapi/';
         compiler_dir = [oneapi_root, 'compiler/latest/mac/'];
-    elseif ispc && ~isunix  % Windows
+    elseif ispc  % Windows
         oneapi_root = 'C:\Program Files (x86)\Intel\oneAPI\';
         compiler_dir = [oneapi_root, 'compiler\latest\windows\'];
     end
-    compiler_bin = fullfile(compiler_dir, 'bin');
-    compiler_bin64 = fullfile(compiler_bin, 'intel64');  % Why not worry about 32-bit case? Since R2016a, MATLAB has been 64-bit only.
-    setenv('PATH', [getenv('PATH'), pathsep, compiler_bin, pathsep, compiler_bin64]);  % Not needed for Windows as of 2023.
-    setenv('ONEAPI_ROOT', oneapi_root);
-    setenv('IFORT_COMPILER18', compiler_dir);
+    2
+    compiler_bin = fullfile(compiler_dir, 'bin')
+    compiler_bin64 = fullfile(compiler_bin, 'intel64')  % Why not worry about 32-bit case? Since R2016a, MATLAB has been 64-bit only.
+    setenv('PATH', [getenv('PATH'), pathsep, compiler_bin, pathsep, compiler_bin64])  % Not needed for Windows as of 2023.
+    setenv('ONEAPI_ROOT', oneapi_root)
+    setenv('IFORT_COMPILER18', compiler_dir)
 
+    3
     % Try setting up MEX again.
     mex_setup = -1;
     exception = [];
     try
         %[~, mex_setup] = evalc('mex(''-setup'', language)'); % Use evalc so that no output will be displayed
-        mex_setup = mex('-setup', language); % mex -setup may be interactive. So it is not good to mute it completely!!!
+        %mex_setup = mex('-setup', language); % mex -setup may be interactive. So it is not good to mute it completely!!!
+        mex_setup = mex('-v', '-setup', language); % mex -setup may be interactive. So it is not good to mute it completely!!!
     catch exception
         % Do nothing
     end
+    4
 
     % If the setup fails again, give up after restoring ONEAPI_ROOT and IFORT_COMPILER18.
     if ~isempty(exception) || mex_setup ~= 0
