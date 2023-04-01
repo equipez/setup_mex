@@ -43,7 +43,7 @@ mex_setup
 % for Fortran, we set the environment variables ONEAPI_ROOT and IFORT_COMPILER18/19 ...
 % This should make MEX setup work for Fortran on MATLAB 2020a or above if a **default** installation
 % of Intel OneAPI (available for free) has been done and Xcode or Microsoft VS is correctly installed.
-% Update 20230401: MATLAB R2023a seems not checking ONEAPI_ROOT, and IFORT_COMPILER23 is needed.
+% Update 20230401: MATLAB R2022b/R2023a seem not checking ONEAPI_ROOT, and IFORT_COMPILER23 is needed.
 if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || mex_setup ~= 0)
     if ismac
         oneapi_root = '/opt/intel/oneapi/';
@@ -67,8 +67,7 @@ if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || me
     isenvs = false(1, nyear + 1);
 
     for ienvvar = 1 : length(envvars) - 1
-        ynum = first_year + ienvvar - 1;
-        envvars{ynum} = ['IFORT_COMPILER', int2str(ynum)];
+        envvars{ienvvar} = ['IFORT_COMPILER', int2str(first_year + ienvvar - 1)];
     end
     envvars{end} = 'ONEAPI_ROOT';
 

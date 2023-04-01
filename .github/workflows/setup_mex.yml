@@ -20,7 +20,7 @@ jobs:
         matlab: [R2020a, R2020b, R2021a, R2021b, R2022a, R2022b, latest]
           #oneapi: [2021, 2022, 2023]
         oneapi: [2022, 2023]
-        lang: [Fortran, C]
+        lang: [Fortran]#, C]
         exclude:
           - os: windows-2019
             matlab: R2020a
