@@ -43,16 +43,16 @@ end
 % Indeed, setting either ONEAPI_ROOT or IFORT_COMPILER18 would be sufficient.
 if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || mex_setup ~= 0)
 
-    % Test whether the environment variables ONEAPI_ROOT and IFORT_COMPILER18 exist (isenv is
+    % Test whether the environment variables ONEAPI_ROOT and IFORT_COMPILER23 exist (isenv is
     % available since R2022b).
     isenv_oneapi_root = ~exist('isenv', 'builtin') || isenv('ONEAPI_ROOT');
-    isenv_ifort_compiler18 = ~exist('isenv', 'builtin') || isenv('IFORT_COMPILER18');
+    isenv_ifort_compiler23 = ~exist('isenv', 'builtin') || isenv('IFORT_COMPILER23');
 
-    % Get the values of ONEAPI_ROOT and IFORT_COMPILER18; the value is empty in case of nonexistence.
+    % Get the values of ONEAPI_ROOT and IFORT_COMPILER23; the value is empty in case of nonexistence.
     oneapi_root_save = getenv('ONEAPI_ROOT');
-    ifort_compiler18_save = getenv('IFORT_COMPILER18');
+    ifort_compiler23_save = getenv('IFORT_COMPILER23');
 
-    % Set PATH, ONEAPI_ROOT, and IFORT_COMPILER18.
+    % Set PATH, ONEAPI_ROOT, and IFORT_COMPILER23.
     if ismac
         oneapi_root = '/opt/intel/oneapi/';
         compiler_dir = [oneapi_root, 'compiler/latest/mac/'];
@@ -67,8 +67,8 @@ if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || me
     getenv('PATH')
     setenv('ONEAPI_ROOT', oneapi_root)
     getenv('ONEAPI_ROOT')
-    setenv('IFORT_COMPILER18', compiler_dir)
-    getenv('IFORT_COMPILER18')
+    setenv('IFORT_COMPILER23', compiler_dir)
+    getenv('IFORT_COMPILER23')
 
     3
     % Try setting up MEX again.
@@ -83,16 +83,16 @@ if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || me
     end
     4
 
-    % If the setup fails again, give up after restoring ONEAPI_ROOT and IFORT_COMPILER18.
+    % If the setup fails again, give up after restoring ONEAPI_ROOT and IFORT_COMPILER23.
     if ~isempty(exception) || mex_setup ~= 0
         setenv('ONEAPI_ROOT', oneapi_root_save);
-        setenv('IFORT_COMPILER18', ifort_compiler18_save);
+        setenv('IFORT_COMPILER23', ifort_compiler23_save);
         if exist('unsetenv', 'builtin')  % unsetenv is available since R2022b.
             if ~isenv_oneapi_root
                 unsetenv('ONEAPI_ROOT');
             end
-            if ~isenv_ifort_compiler18
-                unsetenv('IFORT_COMPILER18');
+            if ~isenv_ifort_compiler23
+                unsetenv('IFORT_COMPILER23');
             end
         end
     end
