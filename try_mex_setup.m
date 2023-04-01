@@ -29,6 +29,9 @@ catch exception
     % Do nothing
 end
 
+2
+mex_setup
+
 % If MEX setup fails, it is probably because of failing to find a supported compiler. See
 % https://www.mathworks.com/support/requirements/supported-compilers.html. On Linux, it is easy to
 % fix and the user should be capable of handling it. So we focus on macOS and Windows.
@@ -36,23 +39,12 @@ end
 % (Microsoft Visual Studio with the "Desktop development with C++" workload) on Windows.
 % For Fortran, we need Xcode on macOS or Microsoft Visual Studio (maybe also with "Desktop
 % development with C++") on Windows, and additionally the Intel Fortran compiler with the
-% environment variables ONEAPI_ROOT or IFORT_COMPILER18/19/20 (as of R2020a-22b) set accordingly.
-% In the following, for Fortran, we set the environment variables ONEAPI_ROOT and IFORT_COMPILER18.
+% environment variables ONEAPI_ROOT or IFORT_COMPILERYEAR set accordingly. In the following,
+% for Fortran, we set the environment variables ONEAPI_ROOT and IFORT_COMPILER18/19 ...
 % This should make MEX setup work for Fortran on MATLAB 2020a or above if a **default** installation
 % of Intel OneAPI (available for free) has been done and Xcode or Microsoft VS is correctly installed.
-% Indeed, setting either ONEAPI_ROOT or IFORT_COMPILER18 would be sufficient.
+% Update 20230401: MATLAB R2023a seems not checking ONEAPI_ROOT, and IFORT_COMPILER23 is needed.
 if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || mex_setup ~= 0)
-
-    % Test whether the environment variables ONEAPI_ROOT and IFORT_COMPILER23 exist (isenv is
-    % available since R2022b).
-    isenv_oneapi_root = ~exist('isenv', 'builtin') || isenv('ONEAPI_ROOT');
-    isenv_ifort_compiler23 = ~exist('isenv', 'builtin') || isenv('IFORT_COMPILER23');
-
-    % Get the values of ONEAPI_ROOT and IFORT_COMPILER23; the value is empty in case of nonexistence.
-    oneapi_root_save = getenv('ONEAPI_ROOT');
-    ifort_compiler23_save = getenv('IFORT_COMPILER23');
-
-    % Set PATH, ONEAPI_ROOT, and IFORT_COMPILER23.
     if ismac
         oneapi_root = '/opt/intel/oneapi/';
         compiler_dir = [oneapi_root, 'compiler/latest/mac/'];
@@ -60,15 +52,40 @@ if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || me
         oneapi_root = 'C:\Program Files (x86)\Intel\oneAPI\';
         compiler_dir = [oneapi_root, 'compiler\latest\windows\'];
     end
-    2
-    compiler_bin = fullfile(compiler_dir, 'bin')
-    compiler_bin64 = fullfile(compiler_bin, 'intel64')  % Why not worry about 32-bit case? Since R2016a, MATLAB has been 64-bit only.
+
+    % Set PATH.
+    compiler_bin = fullfile(compiler_dir, 'bin');
+    compiler_bin64 = fullfile(compiler_bin, 'intel64');  % Why not worry about 32-bit case? Since R2016a, MATLAB has been 64-bit only.
     setenv('PATH', [getenv('PATH'), pathsep, compiler_bin, pathsep, compiler_bin64])  % Not needed for Windows as of 2023.
-    getenv('PATH')
-    setenv('ONEAPI_ROOT', oneapi_root)
-    getenv('ONEAPI_ROOT')
-    setenv('IFORT_COMPILER23', compiler_dir)
-    getenv('IFORT_COMPILER23')
+
+    % Set IFORT_COMPILER18, IFORT_COMPILER19, ..., IFORT_COMPILERCURRENT, ONEAPI_ROOT.
+    first_year = 18;
+    current_year = year(datetime()) - 2000
+    nyear = current_year - first_year + 1;
+    envvars = cell(1, nyear + 1);
+    envvars_save = cell(1, nyear + 1);
+    isenvs = false(1, nyear + 1);
+
+    for ienvvar = 1 : length(envvars) - 1
+        ynum = first_year + ienvvar - 1;
+        envvars{ynum} = ['IFORT_COMPILER', int2str(ynum)];
+    end
+    envvars{end} = 'ONEAPI_ROOT';
+
+    for ienvvar = 1 : length(envvars)
+        envvar = envvars{ienvvar}
+        % Test whether the environment variable exists (isenv is available since R2022b).
+        isenvs(ienvvar) = ~exist('isenv', 'builtin') || isenv(envvar)
+        % Save the value of the environment variable; the value is empty in case of nonexistence.
+        envvars_save{ienvvar} = getenv(envvar);
+        % Set the environment variable.
+        if strcmp(envvar, 'ONEAPI_ROOT')
+            setenv(envvar, oneapi_root);
+        else
+            setenv(envvar, compiler_dir);
+        end
+        getenv(envvar)
+    end
 
     3
     % Try setting up MEX again.
@@ -85,14 +102,12 @@ if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || me
 
     % If the setup fails again, give up after restoring ONEAPI_ROOT and IFORT_COMPILER23.
     if ~isempty(exception) || mex_setup ~= 0
-        setenv('ONEAPI_ROOT', oneapi_root_save);
-        setenv('IFORT_COMPILER23', ifort_compiler23_save);
-        if exist('unsetenv', 'builtin')  % unsetenv is available since R2022b.
-            if ~isenv_oneapi_root
-                unsetenv('ONEAPI_ROOT');
-            end
-            if ~isenv_ifort_compiler23
-                unsetenv('IFORT_COMPILER23');
+        for ienvvar = 1 : length(envvars)
+            envvar = envvars{ienvvar}
+            setenv(envvar, envvars_save{ienvvar});
+            getenv(envvar)
+            if exist('unsetenv', 'builtin') && ~isenvs(ienvvar)  % unsetenv is available since R2022b.
+                unsetenv(envvar);
             end
         end
     end
