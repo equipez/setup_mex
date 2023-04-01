@@ -64,8 +64,11 @@ if strcmpi(language, 'FORTRAN') && (ismac || ispc) && (~isempty(exception) || me
     compiler_bin = fullfile(compiler_dir, 'bin')
     compiler_bin64 = fullfile(compiler_bin, 'intel64')  % Why not worry about 32-bit case? Since R2016a, MATLAB has been 64-bit only.
     setenv('PATH', [getenv('PATH'), pathsep, compiler_bin, pathsep, compiler_bin64])  % Not needed for Windows as of 2023.
+    getenv('PATH')
     setenv('ONEAPI_ROOT', oneapi_root)
+    getenv('ONEAPI_ROOT')
     setenv('IFORT_COMPILER18', compiler_dir)
+    getenv('IFORT_COMPILER18')
 
     3
     % Try setting up MEX again.
