@@ -22,8 +22,6 @@ jobs:
         lang: [Fortran, C]
         exclude:
           - os: windows-2019
-            matlab: R2020a
-          - os: windows-2019
             matlab: R2020b
           - os: windows-2019
             matlab: R2022b
