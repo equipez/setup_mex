@@ -24,7 +24,7 @@ Before starting, clone this repository. Then do the following according to your 
 
     - Install Xcode with Clang
     - In MATLAB, change the directory to the folder of the repository, run
-    ```
+    ```matlab
     try_mex_setup('C')
     ```
 
@@ -32,11 +32,11 @@ Before starting, clone this repository. Then do the following according to your 
 
     - Install Xcode with Clang
     - In [terminal](https://support.apple.com/en-hk/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac), change the directory to the folder of the repository, run
-    ```
+    ```bash
     sudo bash install_oneapi_macos.sh
     ```
     - In MATLAB, change the directory to the folder of the repository, run
-    ```
+    ```matlab
     try_mex_setup('Fortran')
     ```
 
@@ -46,7 +46,7 @@ Before starting, clone this repository. Then do the following according to your 
 
     - Install Microsoft Visual Studio with the "Desktop development with C++" workload
     - In MATLAB, change the directory to the folder of the repository, run
-    ```
+    ```matlab
     try_mex_setup('C')
     ```
 
@@ -54,11 +54,11 @@ Before starting, clone this repository. Then do the following according to your 
 
     - Install Microsoft Visual Studio with the "Desktop development with C++" workload
     - In [**cmd**](https://en.wikipedia.org/wiki/Cmd.exe) (not [PowerShell](https://en.wikipedia.org/wiki/PowerShell)),  change the directory to the folder of the repository, run
-    ```
+    ```bash
     install_oneapi_windows.bat
     ```
     - In MATLAB, change the directory to the folder of the repository, run
-    ```
+    ```matlab
     try_mex_setup('Fortran')
     ```
 
