@@ -7,7 +7,7 @@
 ## What
 
 This package provides scripts that attempt to facilitate setting up the
-[MATLAB MEX](https://www.mathworks.com/help/matlab/ref/mex.html) on macOS or Windows. 
+[MATLAB MEX](https://www.mathworks.com/help/matlab/ref/mex.html) on macOS or Windows.
 For Fortran, it will install (automatically) the Fortran compiler from [Intel oneAPI](https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html), available free of charge.
 The setup on Linux is trivial and Linuxers should be capable of handling it half asleep.
 
@@ -17,7 +17,7 @@ of MathWorks about ["how to set up MEX"](https://www.mathworks.com/help/matlab/r
 
 ## How
 
-Before starting, clone this repository. Then do the following according to your system (macOS or Windows) and your need (C or Fortran). 
+Before starting, clone this repository. Then do the following according to your system (macOS or Windows) and your need (C or Fortran).
 
 ### macOS
 
@@ -26,7 +26,7 @@ Before starting, clone this repository. Then do the following according to your 
     - Install Xcode with Clang
     - In MATLAB, change the directory to the folder of the repository, run
     ```matlab
-    try_mex_setup('C')
+    try_mex_setup('c')
     ```
 
 - Fortran
@@ -38,7 +38,7 @@ Before starting, clone this repository. Then do the following according to your 
     ```
     - In MATLAB, change the directory to the folder of the repository, run
     ```matlab
-    try_mex_setup('Fortran')
+    try_mex_setup('fortran')
     ```
 
 ### Windows
@@ -48,7 +48,7 @@ Before starting, clone this repository. Then do the following according to your 
     - Install Microsoft Visual Studio with the "Desktop development with C++" workload
     - In MATLAB, change the directory to the folder of the repository, run
     ```matlab
-    try_mex_setup('C')
+    try_mex_setup('c')
     ```
 
 - Fortran
@@ -60,7 +60,7 @@ Before starting, clone this repository. Then do the following according to your 
     ```
     - In MATLAB, change the directory to the folder of the repository, run
     ```matlab
-    try_mex_setup('Fortran')
+    try_mex_setup('fortran')
     ```
 
 ## Remarks
