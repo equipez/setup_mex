@@ -69,16 +69,16 @@ jobs:
           command: |
             lang = '${{ matrix.lang }}';
 
-            %fprintf("\n\nTry setting mex up, attempt 1:\n\n")
-            %try_mex_setup(lang, true);
+            fprintf("\n\nTry setting mex up, attempt 1:\n\n");
+            try_mex_setup(lang, true);
 
-            %fprintf("\n\nTry setting mex up, attempt 2:\n\n")
-            %mex -v -setup ${{ matrix.lang }};
+            fprintf("\n\nTry setting mex up, attempt 2:\n\n");
+            mex -v -setup ${{ matrix.lang }}
 
-            %fprintf("\n\nTry setting mex up, attempt 3:\n\n")
-            %try_mex_setup(lang, true);
+            fprintf("\n\nTry setting mex up, attempt 3:\n\n");
+            try_mex_setup(lang, true);
 
-            fprintf("\n\nTry compiling the official example from MathWorks:\n\n")
+            fprintf("\n\nTry compiling the official example from MathWorks:\n\n");
             if strcmpi(lang, 'Fortran')
                 mex('-v', fullfile(matlabroot,'extern','examples','refbook','timestwo.F'));
             else
