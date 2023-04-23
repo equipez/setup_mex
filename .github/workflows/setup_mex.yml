@@ -74,7 +74,7 @@ jobs:
 
             fprintf("\n\nTry setting mex up, attempt 2:\n\n")
 
-            mex -v -setup matrix.lang;
+            mex -v -setup ${{ matrix.lang }};
 
             fprintf("\n\nTry setting mex up, attempt 3:\n\n")
             try_mex_setup(lang, true);
