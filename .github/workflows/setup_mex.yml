@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2019, windows-latest, macos-11, macos-latest]
+        os: [windows-2019, windows-latest, macos-11, macos-latest, macos-13]
         matlab: [R2020b, R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, latest]
         oneapi: [2022, 2023]
         lang: [Fortran, C]
@@ -45,6 +45,29 @@ jobs:
             matlab: R2022a
           - os: windows-latest
             matlab: R2022b
+
+        # The following combinations of OS and MATLAB are not available on GitHub Actions as of 20231009
+          - os: windows-2019
+            matlab: R2023b
+          - os: windows-latest
+            matlab: R2023b
+          - os: macos-11
+            matlab: R2023b
+          - os: macos-12
+            matlab: R2023b
+          - os: macos-13
+            matlab: R2023b
+          - os: windows-2019
+            matlab: latest
+          - os: windows-latest
+            matlab: latest
+          - os: macos-11
+            matlab: latest
+          - os: macos-12
+            matlab: latest
+          - os: macos-13
+            matlab: latest
+          
 
     steps:
       - name: Check out repository
