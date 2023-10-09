@@ -7,9 +7,18 @@
 ## What
 
 This package provides scripts that attempt to facilitate setting up the
-[MATLAB MEX](https://www.mathworks.com/help/matlab/ref/mex.html) on macOS or Windows.
-For Fortran, it will install (automatically) the Fortran compiler from [Intel oneAPI](https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html), available free of charge.
+[MATLAB MEX](https://www.mathworks.com/help/matlab/ref/mex.html), focusing on macOS or Windows.
 The setup on Linux is trivial and Linuxers should be capable of handling it half asleep.
+
+Not that MATLAB requires you to install a [supported (C or Fortran) compiler along with Xcode (on macOS) 
+or Microsoft Visual Studio (on Windows)](https://www.mathworks.com/support/requirements/previous-releases.html). 
+`setup_mex` is **not** a hacking tool to circumvent these requirements,
+but a tool to help MATLAB recognize your compiler after these requirements are satisfied. The recognization
+is not as trivial as it sounds to be. 
+
+For Fortran, `setup_mex` will install (automatically) the Fortran compiler from 
+[Intel oneAPI](https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html), 
+available free of charge, because this is the compiler officially supported by MATLAB. 
 
 This package has been tested on all recent releases of MATLAB under recent versions of Windows and macOS via 
 [GitHub Actions](https://github.com/equipez/setup_mex/actions/workflows/setup_mex.yml). In case it does not
