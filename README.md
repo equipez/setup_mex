@@ -12,7 +12,7 @@ The setup on Linux is trivial and Linuxers should be capable of handling it half
 
 Not that MATLAB requires you to install a [supported (C or Fortran) compiler along with Xcode (on macOS) 
 or Microsoft Visual Studio (on Windows)](https://www.mathworks.com/support/requirements/previous-releases.html). 
-This is **not** a hacking tool to circumvent these requirements,
+This package is **not** a hacking tool to circumvent these requirements,
 but a tool to help MATLAB recognize your compiler after these requirements are satisfied.
 
 For Fortran, `setup_mex` will install (automatically) the Fortran compiler from 
