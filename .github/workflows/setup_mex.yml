@@ -53,7 +53,7 @@ jobs:
             matlab: R2023b
           - os: macos-11
             matlab: R2023b
-          - os: macos-12
+          - os: macos-latest
             matlab: R2023b
           - os: macos-13
             matlab: R2023b
@@ -63,7 +63,7 @@ jobs:
             matlab: latest
           - os: macos-11
             matlab: latest
-          - os: macos-12
+          - os: macos-latest
             matlab: latest
           - os: macos-13
             matlab: latest
