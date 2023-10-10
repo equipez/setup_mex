@@ -8,7 +8,6 @@
 
 This package provides scripts that attempt to facilitate setting up the
 [MATLAB MEX](https://www.mathworks.com/help/matlab/ref/mex.html), focusing on macOS or Windows.
-The setup on Linux is trivial and Linuxers should be capable of handling it half asleep.
 
 Not that MATLAB requires you to install a [supported (C or Fortran) compiler along with Xcode (on macOS) 
 or Microsoft Visual Studio (on Windows)](https://www.mathworks.com/support/requirements/previous-releases.html). 
