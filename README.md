@@ -15,11 +15,12 @@ or Microsoft Visual Studio (on Windows)](https://www.mathworks.com/support/requi
 This package is **not** a hacking tool to circumvent these requirements,
 but a tool to help MATLAB recognize your compiler after these requirements are satisfied.
 
-For Fortran, `setup_mex` will install (automatically) the Fortran compiler from 
+For Fortran, this package provides scripts (`install_oneapi_macos.sh` and `install_oneapi_windows.bat`) to help
+you install the Fortran compiler from 
 [Intel oneAPI](https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html), 
-available free of charge, because this is the compiler officially supported by MATLAB. 
+available free of charge. This is the compiler officially supported by MATLAB. 
 
-This package has been tested on all recent releases of MATLAB under recent versions of Windows and macOS via 
+This package has been successfully tested on all recent releases of MATLAB under recent versions of Windows and macOS via 
 [GitHub Actions](https://github.com/equipez/setup_mex/actions/workflows/setup_mex.yml). 
 Nevertheless, I will not be surprised if it does not work on your machine. In that case,
 you need to consult a local MATLAB expert or the technical support
