@@ -7,7 +7,6 @@
 ::
 :: Zaikun Zhang (www.zhangzk.net), January 9, 2023
 
-
 :: URL for the offline installer of Intel OneAPI Fortran compiler. To get the latest URL, search for
 :: "Intel Fortran Compiler Classic and Intel Fortran Compiler for Windows" at
 :: https://www.intel.com/content/www/us/en/developer/articles/tool/oneapi-standalone-components.html
