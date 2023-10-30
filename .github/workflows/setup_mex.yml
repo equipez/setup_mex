@@ -21,25 +21,6 @@ jobs:
         oneapi: [2022, 2023]
         lang: [Fortran, C]
 
-        exclude:
-        # The following combinations of OS and MATLAB are not available on GitHub Actions as of 20231009
-          - os: windows-latest
-            matlab: R2023b
-          - os: macos-11
-            matlab: R2023b
-          - os: macos-latest
-            matlab: R2023b
-          - os: macos-13
-            matlab: R2023b
-          - os: windows-latest
-            matlab: latest
-          - os: macos-11
-            matlab: latest
-          - os: macos-latest
-            matlab: latest
-          - os: macos-13
-            matlab: latest
-
         # Only MATLAB R2021a, R2021b, and R2022a are available on Windows-2019
           - os: windows-2019
             matlab: R2020b
