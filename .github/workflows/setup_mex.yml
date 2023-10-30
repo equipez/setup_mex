@@ -21,6 +21,7 @@ jobs:
         oneapi: [2022, 2023]
         lang: [Fortran, C]
 
+        exclud:
         # Only MATLAB R2021a, R2021b, and R2022a are available on Windows-2019
           - os: windows-2019
             matlab: R2020b
