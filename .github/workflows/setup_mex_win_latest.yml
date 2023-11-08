@@ -27,7 +27,7 @@ jobs:
         run: cmd.exe "/K" '"install_oneapi_windows.bat" ${{ matrix.oneapi }}'
 
       - name: Set up MATLAB
-        uses: matlab-actions/setup-matlab@v1.2.4
+        uses: matlab-actions/setup-matlab@v1.2.5
         with:
           release: ${{ matrix.matlab }}
 
