@@ -44,10 +44,16 @@ end
 if strcmpi(language, 'fortran') && (ismac || ispc) && (~isempty(exception) || mex_setup ~= 0)
     if ismac
         oneapi_root = '/opt/intel/oneapi/';
-        compiler_dir = [oneapi_root, 'compiler/latest/mac/'];
+        system_string = 'mac';
     elseif ispc  % Windows
         oneapi_root = 'C:\Program Files (x86)\Intel\oneAPI\';
-        compiler_dir = [oneapi_root, 'compiler\latest\windows\'];
+        system_string = 'windows';
+    end
+    % Starting from OneAPI 2024, the compiler is in the directory "compiler/latest", not in
+    % "compiler/latest/<system_string>".
+    compiler_dir = fullfile(oneapi_root, 'compiler', 'latest', system_string);
+    if ~exist(compiler_dir, 'dir')
+        compiler_dir = fullfile(oneapi_root, 'compiler', 'latest');
     end
 
     % Set PATH.
