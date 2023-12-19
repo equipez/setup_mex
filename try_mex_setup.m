@@ -49,8 +49,12 @@ if strcmpi(language, 'fortran') && (ismac || ispc) && (~isempty(exception) || me
         oneapi_root = 'C:\Program Files (x86)\Intel\oneAPI\';
         system_string = 'windows';
     end
-    % Starting from OneAPI 2024, the compiler is in the directory "compiler/latest", not in
-    % "compiler/latest/<system_string>".
+    % Intel oneAPI does not support macOS any more starting from oneAPI 2024.
+    % For oneAPI 2024 on Windows, the compiler directory is "compiler/latest", and ifort is located
+    % in "compiler/latest/bin/"; In previous versions, the paths were
+    % "compiler/latest/<system_string>" and "compiler/latest/<system_string>/bin/intel64".
+    % As of Dec 2023, oneAPI 2024 is not supported by oe Windows, because MATLAB cannot find ifort
+    % due to the change of the directory structure, even if ONEAPI_ROOT is set correctly.
     compiler_dir = fullfile(oneapi_root, 'compiler', 'latest', system_string);
     if ~exist(compiler_dir, 'dir')
         compiler_dir = fullfile(oneapi_root, 'compiler', 'latest');

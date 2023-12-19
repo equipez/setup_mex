@@ -18,7 +18,7 @@ jobs:
       matrix:
         os: [windows-2019, windows-latest, macos-11, macos-latest, macos-13]
         matlab: [R2020b, R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, latest]
-        oneapi: [2022, 2023, 2024]
+        oneapi: [2022, 2023] #, 2024]  # oneAPI is not supported yet as of Dec 2023.
         lang: [Fortran, C]
 
         exclude:
@@ -33,6 +33,7 @@ jobs:
             matlab: R2023b
           - os: windows-2019
             matlab: latest
+        # Intel oneAPI does not support macOS anymore starting from 2024.
           - os: macos-11
             oneapi: 2024
           - os: macos-latest
@@ -42,7 +43,7 @@ jobs:
 
         # Below R2022a, MEX does not work on windows-latest due to the version of MS Visual Studio;
         # R2022a/b should work according to the documentation of MathWorks and GitHub Actions, but
-        # they do not as of March 2022
+        # they do not as of March 2022.
           - os: windows-latest
             matlab: R2020b
           - os: windows-latest
