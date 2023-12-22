@@ -81,7 +81,7 @@ jobs:
           release: ${{ matrix.matlab }}
 
       - name: Run the test
-        uses: matlab-actions/run-command@v1.2.2
+        uses: matlab-actions/run-command@v1.2.3
         with:
           command: |
             lang = '${{ matrix.lang }}';
