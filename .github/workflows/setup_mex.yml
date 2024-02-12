@@ -68,17 +68,11 @@ jobs:
         if: startsWith(matrix.os, 'windows') && matrix.lang == 'Fortran'
         run: cmd.exe "/K" '"install_oneapi_windows.bat" ${{ matrix.oneapi }}'
 
-      - name: Cache MATLAB
-        id: cache-matlab
-        uses: actions/cache@v4.0.0
-        with:
-          path: ${{ runner.tool_cache }}/MATLAB
-          key: ${{ matrix.os }}-${{ matrix.matlab }}
-
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v2.0.0
         with:
           release: ${{ matrix.matlab }}
+          cache: true
 
       - name: Run the test
         uses: matlab-actions/run-command@v2.0.0
