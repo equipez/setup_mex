@@ -40,6 +40,11 @@ jobs:
             oneapi: 2024
           - os: macos-13
             oneapi: 2024
+         # Intel oneAPI 2022 does not support Windows anymore starting from Mar. 2024
+          - os: windows-2019
+            oneapi: 2022
+          - os: windows-latest
+            oneapi: 2022
 
         # Below R2022a, MEX does not work on windows-latest due to the version of MS Visual Studio;
         # R2022a/b should work according to the documentation of MathWorks and GitHub Actions, but
