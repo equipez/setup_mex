@@ -67,14 +67,15 @@ Before starting, clone this repository. Then do the following according to your 
 - Fortran
 
     - Install Microsoft Visual Studio with the "Desktop development with C++" workload
-    - In [**cmd**](https://en.wikipedia.org/wiki/Cmd.exe) (not [PowerShell](https://en.wikipedia.org/wiki/PowerShell)),  change the directory to the folder of the repository. If your MATLAB version is R2023b or below, then run
-    ```bash
-    install_oneapi_windows.bat 2023
-    ```
-    If your MATLAB version is R2024a or above, then run
-        ```bash
-    install_oneapi_windows.bat 
-    ```
+    - In [**cmd**](https://en.wikipedia.org/wiki/Cmd.exe) (not [PowerShell](https://en.wikipedia.org/wiki/PowerShell)),  change the directory to the folder of the repository.
+      -- If your MATLAB version is R2023b or below, then run
+         ```bash
+         install_oneapi_windows.bat 2023
+         ```
+      -- If your MATLAB version is R2024a or above, then run
+         ```bash
+         install_oneapi_windows.bat 
+         ```
   
     - In MATLAB, change the directory to the folder of the repository, run
     ```matlab
