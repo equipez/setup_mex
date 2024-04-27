@@ -9,7 +9,7 @@
 This package provides scripts that attempt to facilitate setting up the
 [MATLAB MEX](https://www.mathworks.com/help/matlab/ref/mex.html), focusing on macOS or Windows. 
 
-Note that MATLAB requires you to install a [supported (C or Fortran) compiler along with Xcode (on macOS) 
+Note that MATLAB requires you to install a [supported (C or Fortran) compiler along with Xcode (on macOS with Intel chips) 
 or Microsoft Visual Studio (on Windows)](https://www.mathworks.com/support/requirements/previous-releases.html). 
 This package is **not** a hacking tool to circumvent these requirements,
 but a tool to help MATLAB recognize your compiler after these requirements are satisfied.
@@ -33,7 +33,7 @@ of MathWorks about ["how to set up MEX"](https://www.mathworks.com/help/matlab/r
 
 Before starting, clone this repository. Then do the following according to your system (macOS or Windows) and your need (C or Fortran).
 
-### macOS
+### macOS with Intel chips
 
 - C
 
