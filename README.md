@@ -7,15 +7,15 @@
 ## What
 
 This package provides scripts that attempt to facilitate setting up the
-[MATLAB MEX](https://www.mathworks.com/help/matlab/ref/mex.html), focusing on macOS or Windows. 
+[MATLAB MEX](https://www.mathworks.com/help/matlab/ref/mex.html), focusing on macOS and Windows. 
 
 Note that MATLAB requires you to install a [supported (C or Fortran) compiler along with Xcode (on macOS with Intel chips) 
 or Microsoft Visual Studio (on Windows)](https://www.mathworks.com/support/requirements/previous-releases.html). 
 This package is **not** a hacking tool to circumvent these requirements,
 but a tool to help MATLAB recognize your compiler after these requirements are satisfied.
 
-As of April 2024, we do not supprt Fortran setup on macOS with silicon chips, because MathWorks
-reauires the NAG Fortran compiler for such a set up, which is
+As of April 2024, we do not support Fortran setup on macOS with silicon chips, because MathWorks
+requires the NAG Fortran compiler for such a setup, which is
 not available for free. 
 
 For Fortran, this package provides scripts (`install_oneapi_macos.sh` for macOS with Intel chips and `install_oneapi_windows.bat` for Windows) to help
