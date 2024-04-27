@@ -14,9 +14,8 @@ or Microsoft Visual Studio (on Windows)](https://www.mathworks.com/support/requi
 This package is **not** a hacking tool to circumvent these requirements,
 but a tool to help MATLAB recognize your compiler after these requirements are satisfied.
 
-As of April 2024, we do not support Fortran setup on macOS with silicon chips, because MathWorks
-requires the NAG Fortran compiler for such a setup, which is
-not available for free. 
+As of April 2024, we do not support Fortran setup on macOS with silicon chips, because MathWorks requires the [NAG Fortran compiler](https://nag.com/fortran-compiler/) for such a setup, which is not available for free. 
+
 
 For Fortran, this package provides scripts (`install_oneapi_macos.sh` for macOS with Intel chips and `install_oneapi_windows.bat` for Windows) to help
 you install the Fortran compiler from 
