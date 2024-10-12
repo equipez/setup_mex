@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2019, windows-latest, macos-11, macos-12, macos-13] # macos-14 is only for Apple Silicon chip, which needs nagfor
+        os: [windows-2019, windows-latest, macos-12, macos-13] # macos-14 is only for Apple Silicon chip, which needs nagfor
         matlab: [R2020b, R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, latest]
         oneapi: [2022, 2023, 2024]  # oneAPI is not supported yet as of Dec 2023.
         lang: [Fortran, C]
@@ -36,8 +36,6 @@ jobs:
           - os: windows-2019
             matlab: latest
         # Intel oneAPI does not support macOS anymore starting from 2024.
-          - os: macos-11
-            oneapi: 2024
           - os: macos-latest
             oneapi: 2024
           - os: macos-13
