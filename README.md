@@ -71,7 +71,7 @@ Before starting, clone this repository. Then do the following according to your 
          ```bash
          install_oneapi_windows.bat YEAR_OF_MATLAB_VERSION
          ```
-      where `YEAR_OF_MATLAB_VERSION` is the year of your MATLAB version, e.g., `2024` for MATLAB R2024a.
+      where **`YEAR_OF_MATLAB_VERSION` is the year of your MATLAB version**, e.g., `2024` for MATLAB R2024a.
 
     - In MATLAB, change the directory to the folder of the repository, and run
       ```matlab
