@@ -7,23 +7,23 @@
 ## What
 
 This package provides scripts that attempt to facilitate setting up the
-[MATLAB MEX](https://www.mathworks.com/help/matlab/ref/mex.html), focusing on macOS and Windows. 
+[MATLAB MEX](https://www.mathworks.com/help/matlab/ref/mex.html), focusing on macOS and Windows.
 
-Note that MATLAB requires you to install a [supported (C or Fortran) compiler along with Xcode (on macOS with Intel chips) 
-or Microsoft Visual Studio (on Windows)](https://www.mathworks.com/support/requirements/previous-releases.html). 
+Note that MATLAB requires you to install a [supported (C or Fortran) compiler along with Xcode (on macOS with Intel chips)
+or Microsoft Visual Studio (on Windows)](https://www.mathworks.com/support/requirements/previous-releases.html).
 This package is **not** a hacking tool to circumvent these requirements,
 but a tool to help MATLAB recognize your compiler after these requirements are satisfied.
 
-As of April 2024, we do not support Fortran setup on macOS with silicon chips, because MathWorks requires the [NAG Fortran compiler](https://nag.com/fortran-compiler/) for such a setup, which is not available for free. 
+As of April 2024, we do not support Fortran setup on macOS with silicon chips, because MathWorks requires the [NAG Fortran compiler](https://nag.com/fortran-compiler/) for such a setup, which is not available for free.
 
 
 For Fortran, this package provides scripts (`install_oneapi_macos.sh` for macOS with Intel chips and `install_oneapi_windows.bat` for Windows) to help
-you install the Fortran compiler from 
-[Intel oneAPI](https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html), 
-available free of charge. This is the compiler officially supported by MATLAB. 
+you install the Fortran compiler from
+[Intel oneAPI](https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html),
+available free of charge. This is the compiler officially supported by MATLAB.
 
-This package has been successfully tested on all recent releases of MATLAB under recent versions of Windows and macOS via 
-[GitHub Actions](https://github.com/equipez/setup_mex/actions/workflows/setup_mex.yml). 
+This package has been successfully tested on all recent releases of MATLAB under recent versions of Windows and macOS via
+[GitHub Actions](https://github.com/equipez/setup_mex/actions/workflows/setup_mex.yml).
 Nevertheless, I will not be surprised if it does not work on your machine. In that case,
 you need to consult a local MATLAB expert or the technical support
 of MathWorks about ["how to set up MEX"](https://www.mathworks.com/help/matlab/ref/mex.html).
@@ -37,7 +37,7 @@ Before starting, clone this repository. Then do the following according to your 
 - C
 
     - Install Xcode with Clang
-    - In MATLAB, change the directory to the folder of the repository, run
+    - In MATLAB, change the directory to the folder of the repository, and run
       ```matlab
       try_mex_setup('c')
       ```
@@ -45,11 +45,11 @@ Before starting, clone this repository. Then do the following according to your 
 - Fortran
 
     - Install Xcode with Clang
-    - In [terminal](https://support.apple.com/en-hk/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac), change the directory to the folder of the repository, run
+    - In [terminal](https://support.apple.com/en-hk/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac), change the directory to the folder of the repository, and run
       ```bash
       sudo bash install_oneapi_macos.sh
       ```
-    - In MATLAB, change the directory to the folder of the repository, run
+    - In MATLAB, change the directory to the folder of the repository, and run
       ```matlab
       try_mex_setup('fortran')
       ```
@@ -59,7 +59,7 @@ Before starting, clone this repository. Then do the following according to your 
 - C
 
     - Install Microsoft Visual Studio with the "Desktop development with C++" workload
-    - In MATLAB, change the directory to the folder of the repository, run
+    - In MATLAB, change the directory to the folder of the repository, and run
       ```matlab
       try_mex_setup('c')
       ```
@@ -67,18 +67,13 @@ Before starting, clone this repository. Then do the following according to your 
 - Fortran
 
     - Install Microsoft Visual Studio with the "Desktop development with C++" workload
-    - In [**cmd**](https://en.wikipedia.org/wiki/Cmd.exe) (not [PowerShell](https://en.wikipedia.org/wiki/PowerShell)),  change the directory to the folder of the repository.
-      
-      -- If your MATLAB version is R2023b or below, then run
+    - In [**cmd**](https://en.wikipedia.org/wiki/Cmd.exe) (not [PowerShell](https://en.wikipedia.org/wiki/PowerShell)),  change the directory to the folder of the repository, and run
          ```bash
-         install_oneapi_windows.bat 2023
+         install_oneapi_windows.bat YEAR_OF_MATLAB_VERSION
          ```
-      -- If your MATLAB version is R2024a or above, then run
-         ```bash
-         install_oneapi_windows.bat 
-         ```
-  
-    - In MATLAB, change the directory to the folder of the repository, run
+      where `YEAR_OF_MATLAB_VERSION` is the year of your MATLAB version, e.g., `2024` for MATLAB R2024a.
+
+    - In MATLAB, change the directory to the folder of the repository, and run
       ```matlab
       try_mex_setup('fortran')
       ```
