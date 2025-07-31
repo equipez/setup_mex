@@ -16,35 +16,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2019, windows-latest, macos-12, macos-13] # macos-14 is only for Apple Silicon chip, which needs nagfor
+        os: [windows-latest, windows-2025, macos-13] # macos-14 is only for Apple Silicon chip, which needs nagfor
         matlab: [R2020b, R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, latest]
-        oneapi: [2022, 2023, 2024]  # oneAPI is not supported yet as of Dec 2023.
+        oneapi: [2023, 2024, 2025]
         lang: [Fortran, C]
 
         exclude:
-        # Only MATLAB R2021a, R2021b, and R2022a are available on Windows-2019
-          - os: windows-2019
-            matlab: R2020b
-          - os: windows-2019
-            matlab: R2022b
-          - os: windows-2019
-            matlab: R2023a
-          - os: windows-2019
-            matlab: R2023b
-          - os: windows-2019
-            matlab: R2024a
-          - os: windows-2019
-            matlab: latest
         # Intel oneAPI does not support macOS anymore starting from 2024.
-          - os: macos-latest
-            oneapi: 2024
           - os: macos-13
             oneapi: 2024
-         # Intel oneAPI 2022 does not support Windows anymore starting from Mar. 2024
-          - os: windows-2019
-            oneapi: 2022
-          - os: windows-latest
-            oneapi: 2022
+          - os: macos-13
+            oneapi: 2025
 
         # Below R2022a, MEX does not work on windows-latest due to the version of MS Visual Studio;
         # R2022a/b should work according to the documentation of MathWorks and GitHub Actions, but
@@ -60,18 +42,32 @@ jobs:
           - os: windows-latest
             matlab: R2022b
 
+          - os: windows-2025
+            matlab: R2020b
+          - os: windows-2025
+            matlab: R2021a
+          - os: windows-2025
+            matlab: R2021b
+          - os: windows-2025
+            matlab: R2022a
+          - os: windows-2025
+            matlab: R2022b
 
           # OneAPI 2024 is not supported before MATLAB R2024a
-          - matlab: R2021a
-            oneapi: 2024
-          - matlab: R2021b
-            oneapi: 2024
-          - matlab: R2022a
-            oneapi: 2024
           - matlab: R2023a
             oneapi: 2024
           - matlab: R2023b
             oneapi: 2024
+
+          # OneAPI 2025 is not supported before MATLAB R2025a
+          - matlab: R2023a
+            oneapi: 2025
+          - matlab: R2023b
+            oneapi: 2025
+          - matlab: R2024a
+            oneapi: 2025
+          - matlab: R2024b
+            oneapi: 2025
 
     steps:
       - name: Check out repository
