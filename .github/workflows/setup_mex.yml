@@ -71,7 +71,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.2
 
       - name: Install Intel oneAPI on macOS for Fortran
         if: startsWith(matrix.os, 'macos') && matrix.lang == 'Fortran'
