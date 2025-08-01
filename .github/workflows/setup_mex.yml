@@ -88,7 +88,7 @@ jobs:
           cache: true
 
       - name: Run the test
-        uses: matlab-actions/run-command@v2.1.1
+        uses: matlab-actions/run-command@v2.2.1
         with:
           command: |
             lang = '${{ matrix.lang }}';
