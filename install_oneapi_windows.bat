@@ -26,7 +26,7 @@ if "%1"=="2021" (
 )
 
 :: Component to install.
-set COMPONENTS=intel.oneapi.win.ifx-compiler
+set COMPONENTS=intel.oneapi.win.ifort-compiler
 
 :: Download the installer.
 :: According to https://curl.se/windows/microsoft.html , curl is included by default in
