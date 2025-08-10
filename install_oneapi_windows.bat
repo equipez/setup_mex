@@ -26,7 +26,7 @@ if "%1"=="2021" (
 )
 
 :: Component to install.
-set COMPONENTS=intel.oneapi.win.ifort-compiler
+set COMPONENTS=intel.oneapi.win.ifx-compiler
 
 :: Download the installer.
 :: According to https://curl.se/windows/microsoft.html , curl is included by default in
@@ -43,8 +43,6 @@ set installer_exit_code=%ERRORLEVEL%
 call "C:\Program Files (x86)\Intel\oneAPI\setvars.bat"
 
 :: Show the result of the installation.
-echo The path to ifort is:
-where ifort.exe
 echo The path to ifx is:
 where ifx.exe
 
