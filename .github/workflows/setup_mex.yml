@@ -16,17 +16,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, windows-2025, macos-13] # macos-14 is only for Apple Silicon chip, which needs nagfor
+        os: [ubuntu-latest, windows-2022, windows-latest, macos-13] # macos-14 is only for Apple Silicon chip, which needs nagfor
         matlab: [R2020b, R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, latest]
         oneapi: [2023, 2024, 2025]
         lang: [Fortran, C]
 
         exclude:
-        # Intel oneAPI does not support macOS anymore starting from 2024.
+          # Intel oneAPI does not support macOS anymore starting from 2024.
           - os: macos-13
             oneapi: 2024
           - os: macos-13
             oneapi: 2025
+          # MATLAB R2020b/21a/21b do not work with the latest gortran
+          - os: ubuntu-latest
+            matlab: R2020b
+          - os: ubuntu-latest
+            matlab: R2021a
+          - os: ubuntu-latest
+            matlab: R2021b
+
 
         # Below R2022a, MEX does not work on windows-latest due to the version of MS Visual Studio;
         # R2022a/b should work according to the documentation of MathWorks and GitHub Actions, but
@@ -72,6 +80,16 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v5.0.0
+
+
+      - name: Set up gfortran on Linux
+        if: startsWith(matrix.os, 'ubuntu')
+        uses: fortran-lang/setup-fortran@main
+        with:
+          compiler: gcc
+      - name: Check gfortran version on Linux
+        if: startsWith(matrix.os, 'ubuntu')
+        run: which gcc && gcc --version && which gfortran && gfortran --version
 
       - name: Install Intel oneAPI on macOS for Fortran
         if: startsWith(matrix.os, 'macos') && matrix.lang == 'Fortran'
