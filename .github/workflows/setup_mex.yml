@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-2022, windows-latest, macos-13] # macos-14 is only for Apple Silicon chip, which needs nagfor
-        matlab: [R2020b, R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, latest]
+        matlab: [R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, latest]
         oneapi: [2023, 2024, 2025]
         lang: [Fortran, C]
 
@@ -27,9 +27,7 @@ jobs:
             oneapi: 2024
           - os: macos-13
             oneapi: 2025
-          # MATLAB R2020b/21a/21b do not work with the latest gortran
-          - os: ubuntu-latest
-            matlab: R2020b
+          # MATLAB R2021a/21b do not work with the latest gortran
           - os: ubuntu-latest
             matlab: R2021a
           - os: ubuntu-latest
@@ -40,8 +38,6 @@ jobs:
         # R2022a/b should work according to the documentation of MathWorks and GitHub Actions, but
         # they do not as of March 2022.
           - os: windows-latest
-            matlab: R2020b
-          - os: windows-latest
             matlab: R2021a
           - os: windows-latest
             matlab: R2021b
@@ -50,8 +46,6 @@ jobs:
           - os: windows-latest
             matlab: R2022b
 
-          - os: windows-2025
-            matlab: R2020b
           - os: windows-2025
             matlab: R2021a
           - os: windows-2025
