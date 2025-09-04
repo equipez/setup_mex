@@ -18,7 +18,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-2022, windows-latest, macos-13] # macos-14 is only for Apple Silicon chip, which needs nagfor
         matlab: [R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, latest]
-        oneapi: [2023, 2024, 2025]
+        oneapi: [2021, 2022, 2023, 2024, 2025]
         lang: [Fortran, C]
 
         exclude:
@@ -37,22 +37,22 @@ jobs:
         # Below R2022a, MEX does not work on windows-latest due to the version of MS Visual Studio;
         # R2022a/b should work according to the documentation of MathWorks and GitHub Actions, but
         # they do not as of March 2022.
-          - os: windows-2022
+          - os: windows-latest
             matlab: R2021a
-          - os: windows-2022
+          - os: windows-latest
             matlab: R2021b
-          - os: windows-2022
+          - os: windows-latest
             matlab: R2022a
-          - os: windows-2022
+          - os: windows-latest
             matlab: R2022b
 
-          - os: windows-latest
+          - os: windows-2025
             matlab: R2021a
-          - os: windows-latest
+          - os: windows-2025
             matlab: R2021b
-          - os: windows-latest
+          - os: windows-2025
             matlab: R2022a
-          - os: windows-latest
+          - os: windows-2025
             matlab: R2022b
 
           # OneAPI 2024 is not supported before MATLAB R2024a
