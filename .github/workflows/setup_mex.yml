@@ -71,6 +71,15 @@ jobs:
           - matlab: R2024b
             oneapi: 2025
 
+          - matlab: R2023a
+            oneapi: latest
+          - matlab: R2023b
+            oneapi: latest
+          - matlab: R2024a
+            oneapi: latest
+          - matlab: R2024b
+            oneapi: latest
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v5.0.0
