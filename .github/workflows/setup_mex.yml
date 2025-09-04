@@ -18,7 +18,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-2022, windows-latest, macos-13] # macos-14 is only for Apple Silicon chip, which needs nagfor
         matlab: [R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, latest]
-        oneapi: [2023, 2024, 2025]  # 2021 and 2022 are not available on macos-13, and it does not work with MATLAB on Windows
+        oneapi: [2023, 2024, latest]  # 2021 and 2022 are not available on macos-13, and it does not work with MATLAB on Windows
         lang: [Fortran, C]
 
         exclude:
