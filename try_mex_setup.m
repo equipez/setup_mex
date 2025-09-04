@@ -128,8 +128,9 @@ end
 
 if ~isempty(exception) || mex_setup ~= 0
     fprintf('\nYour MATLAB failed to run mex(''-setup'', ''%s'').', language);
-    fprintf('\nTo see the detailed error message, execute the following command:\n');
-    fprintf('\n  mex(''-v'', ''-setup'', ''%s'')\n', language);
+    fprintf('\nThe error message is\n%s\n', exception.message);
+    %fprintf('\nTo see the detailed error message, execute the following command:\n');
+    %fprintf('\n  mex(''-v'', ''-setup'', ''%s'')\n', language);
     success = 0;
 else
     % Try `mex(example_file)`
