@@ -19,7 +19,7 @@ jobs:
         os: [ubuntu-latest, windows-2022, windows-latest, macos-15-intel] # macos-14 is only for Apple Silicon chip, which needs nagfor
         matlab: [R2021a, R2021b, R2022a, R2022b, R2023a, R2023b, R2024a, latest]
         # oneAPI 2021 and 2022 are not available on macos-15-intel, and they do not work with MATLAB on Windows.
-        # oneapi = latest means the latest available version on the OS, which is alway 2023 on macos
+        # oneapi = latest means the latest available version on the OS, which is always 2023 on macos
         # unless Intel resumes support for macOS.
         oneapi: [2023, 2024, latest]
         lang: [Fortran, C]
@@ -29,7 +29,7 @@ jobs:
           - os: macos-15-intel
             oneapi: 2024
           - os: macos-15-intel
-            oneapi: 2025
+            oneapi: latest
 
           # MATLAB R2021a/21b do not work with the latest gortran
           - os: ubuntu-latest
