@@ -24,9 +24,9 @@ available free of charge. This is the compiler officially supported by MATLAB.
 
 This package has been successfully tested on all recent releases of MATLAB under recent versions of Windows and macOS via
 [GitHub Actions](https://github.com/equipez/setup_mex/actions/workflows/setup_mex.yml).
-Nevertheless, I will not be surprised if it does not work on your machine. In that case,
+Nevertheless, I will not be surprised if it does not work on your machine. **In that case,
 you need to consult a local MATLAB expert or the technical support
-of MathWorks about ["how to set up MEX"](https://www.mathworks.com/help/matlab/ref/mex.html).
+of MathWorks about ["how to set up MEX"](https://www.mathworks.com/help/matlab/ref/mex.html)**.
 
 ## How
 
