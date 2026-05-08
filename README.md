@@ -57,9 +57,9 @@ Before starting, clone this repository. Then do the following according to your 
 
 ### Windows
 
-If you are using MATLAB R2024a or above, you should first try [setting up MEX with the MinGW-w64 compiler](https://www.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-fortran-compiler). The compiler is free of charge and can be installed via the Add-On Explorer of MATLAB.
+**If you are using MATLAB R2024a or above, you should first try [setting up MEX with the MinGW-w64 compiler](https://www.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-fortran-compiler)**. The compiler is free of charge and can be installed via the Add-On Explorer of MATLAB.
 
-Do the following only if you want to set up MEX with the Intel Compiler and Microsoft Visual Studio, or if you are using an older version of MATLAB that does not support MinGW-w64.
+Do the following **only if** you want to set up MEX with the Intel Compiler and Microsoft Visual Studio, or if you are using an older version of MATLAB that does not support MinGW-w64.
 
 - C
 
