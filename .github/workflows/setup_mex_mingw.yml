@@ -21,7 +21,7 @@ jobs:
       matrix:
         os: [windows-2022, windows-latest]
         matlab: [R2024a, R2024b, R2025a, R2025b, R2026a, latest]
-        mingw: [6, 8, 12, 13, 14, 15, latest]
+        mingw: [8, 12, 13, 14, 15, latest]
         lang: [Fortran]
 
     steps:
@@ -43,6 +43,8 @@ jobs:
 
 
       - name: Install mingw
+        # Here, we install mingw using Chocolatey. It can also be installed as a MATLAB Add-on.
+        # See https://www.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-fortran-compiler
         shell: bash
         if: startsWith(matrix.os, 'windows')
         run: |
@@ -51,9 +53,7 @@ jobs:
             choco install mingw -y --no-progress
             choco upgrade mingw -y --no-progress
           else
-            if [ "$VERSION" -eq 6 ]; then
-              VERSION=6.4.0
-            elif [ "$VERSION" -eq 8 ]; then
+            if [ "$VERSION" -eq 8 ]; then
               VERSION=8.5.0
             else
               VERSION="${VERSION}".2.0
@@ -78,6 +78,7 @@ jobs:
         with:
           command: |
             % 'MW_MINGW64_LOC' should be set to the directory containing bin\gcc.exe and bin\gfortran.exe
+            % See https://www.mathworks.com/matlabcentral/answers/313298-i-already-have-mingw-on-my-computer-how-do-i-configure-it-to-work-with-matlab
             if strcmpi('${{ matrix.mingw }}', 'latest') || ${{ matrix.mingw }} > 12
                 setenv('MW_MINGW64_LOC', 'C:\ProgramData\mingw64\mingw64')
             else
