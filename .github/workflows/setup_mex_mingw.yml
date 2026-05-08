@@ -66,7 +66,7 @@ jobs:
           cache: true
 
       - name: Run the test
-        uses: matlab-actions/run-command@v3.1.0
+        uses: matlab-actions/run-command@v3.1.1
         with:
           command: |
             % 'MW_MINGW64_LOC' should be set to the directory containing bin\gcc.exe and bin\gfortran.exe
