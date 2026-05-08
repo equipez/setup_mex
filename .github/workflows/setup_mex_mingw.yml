@@ -21,8 +21,8 @@ jobs:
       matrix:
         os: [windows-2022, windows-latest]
         matlab: [R2022b, R2023a, R2023b, R2024a, R2025a, R2025b, R2026a, latest]
-        mingw: [12, 14, latest]
-        lang: [Fortran, C]
+        mingw: [13, 14, 15, latest]
+        lang: [Fortran]
 
     steps:
       - name: Check out repository
