@@ -11,7 +11,7 @@ on:
 
 jobs:
   test:
-    name: Test MEX
+    name: Test MEX with mingw
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -24,15 +24,20 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6.0.2
 
+      - name: Remove Visual Studio completely
+        if: startsWith(matrix.os, 'windows')
+        run: |
+        "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" uninstall --all --passive --norestart
+        rmdir /q /s "C:\Program Files (x86)\Microsoft Visual Studio"
 
-      - name: Set up gfortran on Windows
+      - name: Install mingw
         if: startsWith(matrix.os, 'windows')
         run: |
           choco install mingw -y --no-progress
           choco upgrade mingw -y --no-progress  # Update to the latest version
 
-      - name: Check gcc and gfortran version on Linux
-        if: startsWith(matrix.os, 'ubuntu')
+      - name: Check gcc and gfortran version
+        if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'windows')
         run: which gcc && gcc --version && which gfortran && gfortran --version
 
       - name: Set up MATLAB
