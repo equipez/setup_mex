@@ -1,4 +1,4 @@
-name: Test MEX with mingw
+name: Test MEX with MinGW
 
 on:
   # Trigger the workflow on push or pull request
@@ -9,12 +9,9 @@ on:
   # Trigger the workflow when it is manually triggered
   workflow_dispatch:
 
-env:
-  LATEST_MINGW: 15
-
 jobs:
   test:
-    name: Test MEX with mingw
+    name: Test MEX
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -42,7 +39,7 @@ jobs:
           rmdir "C:\Strawberry" /s /q
 
 
-      - name: Install mingw
+      - name: Install MinGW
         # Here, we install mingw using Chocolatey. It can also be installed as a MATLAB Add-on.
         # See https://www.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-fortran-compiler
         shell: bash
