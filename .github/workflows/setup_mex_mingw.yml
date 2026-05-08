@@ -48,10 +48,12 @@ jobs:
         run: |
           VERSION="${{ matrix.mingw }}"
           if [ "$VERSION" = "latest" ]; then
-            VERSION="${{ env.LATEST_MINGW }}"
+            choco install mingw -y --no-progress
+            choco update mingw -y --no-progress
+          else
+            VERSION="${VERSION}".2.0
+            choco install mingw --version=$VERSION -y --no-progress
           fi
-          VERSION="${VERSION}".2.0
-          choco install mingw --version=$VERSION -y --no-progress
           echo "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin" >> $GITHUB_PATH  # mingw 12 and earlier
           echo "C:\ProgramData\mingw64\mingw64\bin" >> $GITHUB_PATH  # mingw 13 and later
 
@@ -70,7 +72,7 @@ jobs:
         with:
           command: |
             % 'MW_MINGW64_LOC' should be set to the directory containing bin\gcc.exe and bin\gfortran.exe
-            if str2int('${{ matrix.mingw }}') <= 12
+            if ${{ matrix.mingw }} <= 12
                 setenv('MW_MINGW64_LOC', 'C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64')
             else
                 setenv('MW_MINGW64_LOC', 'C:\ProgramData\mingw64\mingw64')
