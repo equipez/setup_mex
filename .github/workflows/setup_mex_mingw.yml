@@ -33,7 +33,6 @@ jobs:
         if: startsWith(matrix.os, 'windows')
         run: |
           "C:\Program Files (x86)\Microsoft Visual Studio\Installer\InstallCleanup.exe"
-          rmdir "C:\Program Files (x86)\Microsoft Visual Studio" /s /q
 
       - name: Install mingw
         shell: bash
@@ -43,6 +42,7 @@ jobs:
           if [ "$VERSION" = "latest" ]; then
             VERSION="${{ env.LATEST_MINGW }}"
           fi
+          VERSION="${VERSION}".2.0
           choco install mingw --version=$VERSION -y --no-progress
 
       - name: Check gcc and gfortran version
