@@ -1,0 +1,66 @@
+name: Test MEX
+
+on:
+  # Trigger the workflow on push or pull request
+  push:
+  # Trigger the workflow by cron. The default time zone of GitHub Actions is UTC.
+  schedule:
+    - cron: '0 20 * * 6'
+  # Trigger the workflow when it is manually triggered
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test MEX
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+        matlab: [latest]
+        lang: [Fortran, C]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6.0.2
+
+
+      - name: Set up gfortran on Windows
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          choco install mingw -y --no-progress
+          choco upgrade mingw -y --no-progress  # Update to the latest version
+
+      - name: Check gcc and gfortran version on Linux
+        if: startsWith(matrix.os, 'ubuntu')
+        run: which gcc && gcc --version && which gfortran && gfortran --version
+
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v3.0.0
+        with:
+          release: ${{ matrix.matlab }}
+          cache: true
+
+      - name: Run the test
+        uses: matlab-actions/run-command@v3.1.0
+        with:
+          command: |
+            setenv('MW_MINGW64_LOC', 'C:\ProgramData\mingw64\mingw64')
+
+            lang = '${{ matrix.lang }}';
+
+            fprintf("\n\nTry setting mex up, attempt 0:\n\n");
+            mex -v -setup ${{ matrix.lang }}
+
+            fprintf("\n\nTry setting mex up, attempt 1:\n\n");
+            try_mex_setup(lang, true);
+
+            fprintf("\n\nTry setting mex up, attempt 2:\n\n");
+            mex -v -setup ${{ matrix.lang }}
+
+            fprintf("\n\nTry setting mex up, attempt 3:\n\n");
+            try_mex_setup(lang, true);
+
+            fprintf("\n\nTry compiling the official example from MathWorks:\n\n");
+            mex('-v', official_mex_example(lang));
+            timestwo(1)
