@@ -9,6 +9,9 @@ on:
   # Trigger the workflow when it is manually triggered
   workflow_dispatch:
 
+env:
+  LATEST_MINGW: 15
+
 jobs:
   test:
     name: Test MEX with mingw
@@ -16,8 +19,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest]
+        os: [windows-2022, windows-latest]
         matlab: [latest]
+        mingw: [12, 14, latest]
         lang: [Fortran, C]
 
     steps:
@@ -28,12 +32,17 @@ jobs:
         if: startsWith(matrix.os, 'windows')
         run: |
           "C:\Program Files (x86)\Microsoft Visual Studio\Installer\InstallCleanup.exe"
+          rmdir /s /q "C:\Program Files (x86)\Microsoft Visual Studio"
 
       - name: Install mingw
+        shell: bash
         if: startsWith(matrix.os, 'windows')
         run: |
-          choco install mingw -y --no-progress
-          choco upgrade mingw -y --no-progress  # Update to the latest version
+          VERSION="${{ matrix.mingw }}"
+          if [ "$VERSION" = "latest" ]; then
+            VERSION="${{ env.LATEST_MINGW }}"
+          fi
+          choco install mingw --version=$VERSION -y --no-progress
 
       - name: Check gcc and gfortran version
         if: startsWith(matrix.os, 'ubuntu') || startsWith(matrix.os, 'windows')
@@ -49,7 +58,7 @@ jobs:
         uses: matlab-actions/run-command@v3.1.0
         with:
           command: |
-            setenv('MW_MINGW64_LOC', 'C:\ProgramData\mingw64\mingw64')
+            setenv('MW_MINGW64_LOC', 'C:\mingw64')
 
             lang = '${{ matrix.lang }}';
 
