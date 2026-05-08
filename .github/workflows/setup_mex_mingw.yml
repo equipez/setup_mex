@@ -22,7 +22,7 @@ jobs:
         os: [windows-2022, windows-latest]
         matlab: [R2024a, R2024b, R2025a, R2025b, R2026a, latest]
         mingw: [8, 12, 13, 14, 15, latest]
-        lang: [Fortran]
+        lang: [Fortran, C]
 
     steps:
       - name: Check out repository
@@ -87,17 +87,8 @@ jobs:
 
             lang = '${{ matrix.lang }}';
 
-            fprintf("\n\nTry setting mex up, attempt 0:\n\n");
+            fprintf("\n\nTry setting mex up:\n\n");
             mex -v -setup ${{ matrix.lang }}
-
-            fprintf("\n\nTry setting mex up, attempt 1:\n\n");
-            try_mex_setup(lang, true);
-
-            fprintf("\n\nTry setting mex up, attempt 2:\n\n");
-            mex -v -setup ${{ matrix.lang }}
-
-            fprintf("\n\nTry setting mex up, attempt 3:\n\n");
-            try_mex_setup(lang, true);
 
             fprintf("\n\nTry compiling the official example from MathWorks:\n\n");
             mex('-v', official_mex_example(lang));

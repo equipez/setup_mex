@@ -2,6 +2,7 @@
 
 [![license](https://img.shields.io/badge/license-LGPLv3+-blue)](https://github.com/equipez/setup_mex/blob/main/LICENCE.txt)
 [![Test MEX](https://github.com/equipez/setup_mex/actions/workflows/setup_mex.yml/badge.svg)](https://github.com/equipez/setup_mex/actions/workflows/setup_mex.yml)
+[![Test MEX with MinGW](https://github.com/equipez/setup_mex/actions/workflows/setup_mex_mingw.yml/badge.svg)](https://github.com/equipez/setup_mex/actions/workflows/setup_mex_mingw.yml)
 [![View setup_mex on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/127968-setup_mex)
 
 ## What
@@ -55,6 +56,10 @@ Before starting, clone this repository. Then do the following according to your 
       ```
 
 ### Windows
+
+If you are using MATLAB R2024a or above, you should first try [setting up MEX with the MinGW-w64 compiler](https://www.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-fortran-compiler). The compiler is free of charge and can be installed via the Add-On Explorer of MATLAB.
+
+Do the following only if you want to set up MEX with the Intel Compiler and Microsoft Visual Studio, or if you are using an older version of MATLAB that does not support MinGW-w64.
 
 - C
 
