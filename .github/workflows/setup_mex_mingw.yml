@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-2022, windows-latest]
-        matlab: [R2024a, R2025a, R2025b, R2026a, latest]
+        matlab: [R2024a, R2024b, R2025a, R2025b, R2026a, latest]
         mingw: [14, 15, latest]
         lang: [Fortran]
 
@@ -28,17 +28,18 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6.0.2
 
-      - name: Remove Visual Studio completely
-        shell: cmd
-        if: startsWith(matrix.os, 'windows')
-        run: |
-          "C:\Program Files (x86)\Microsoft Visual Studio\Installer\InstallCleanup.exe"
+      # - name: Remove Visual Studio completely
+      #   shell: cmd
+      #   if: startsWith(matrix.os, 'windows')
+      #   run: |
+      #     "C:\Program Files (x86)\Microsoft Visual Studio\Installer\InstallCleanup.exe"
 
-      - name: Remove existing mingw installation
+      - name: Remove existing gcc installation
         shell: cmd
         if: startsWith(matrix.os, 'windows')
         run: |
           rmdir "C:\mingw64" /s /q
+          rmdir "C:\Strawberry" /s /q
 
 
       - name: Install mingw
