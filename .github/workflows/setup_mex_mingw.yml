@@ -20,8 +20,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-2022, windows-latest]
-        matlab: [R2022b, R2023a, R2023b, R2024a, R2025a, R2025b, R2026a, latest]
-        mingw: [13, 14, 15, latest]
+        matlab: [R2024a, R2025a, R2025b, R2026a, latest]
+        mingw: [14, 15, latest]
         lang: [Fortran]
 
     steps:
