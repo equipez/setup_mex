@@ -27,8 +27,8 @@ jobs:
       - name: Remove Visual Studio completely
         if: startsWith(matrix.os, 'windows')
         run: |
-        "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" uninstall --all --passive --norestart
-        rmdir /q /s "C:\Program Files (x86)\Microsoft Visual Studio"
+          "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" uninstall --all --passive --norestart
+          rmdir /q /s "C:\Program Files (x86)\Microsoft Visual Studio"
 
       - name: Install mingw
         if: startsWith(matrix.os, 'windows')
