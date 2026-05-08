@@ -29,11 +29,11 @@ jobs:
         uses: actions/checkout@v6.0.2
 
       - name: Remove Visual Studio completely
-        shell: pwsh
+        shell: cmd
         if: startsWith(matrix.os, 'windows')
         run: |
           "C:\Program Files (x86)\Microsoft Visual Studio\Installer\InstallCleanup.exe"
-          rmdir /s /q "C:\Program Files (x86)\Microsoft Visual Studio"
+          rmdir "C:\Program Files (x86)\Microsoft Visual Studio" /s /q
 
       - name: Install mingw
         shell: bash
