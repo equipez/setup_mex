@@ -21,7 +21,7 @@ jobs:
       matrix:
         os: [windows-2022, windows-latest]
         matlab: [R2024a, R2024b, R2025a, R2025b, R2026a, latest]
-        mingw: [11, 12, 13, 14, 15, latest]
+        mingw: [8, 12, 13, 14, 15, latest]
         lang: [Fortran]
 
     steps:
@@ -34,7 +34,7 @@ jobs:
       #   run: |
       #     "C:\Program Files (x86)\Microsoft Visual Studio\Installer\InstallCleanup.exe"
 
-      - name: Remove existing gcc installation
+      - name: Remove existing gcc and gfortran installation
         shell: cmd
         if: startsWith(matrix.os, 'windows')
         run: |
@@ -49,7 +49,7 @@ jobs:
           VERSION="${{ matrix.mingw }}"
           if [ "$VERSION" = "latest" ]; then
             choco install mingw -y --no-progress
-            choco update mingw -y --no-progress
+            choco upgrade mingw -y --no-progress
           else
             VERSION="${VERSION}".2.0
             choco install mingw --version=$VERSION -y --no-progress
