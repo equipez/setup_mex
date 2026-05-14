@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2022, windows-latest]
+        os: [windows-latest]
         matlab: [R2024a, R2024b, R2025a, R2025b, R2026a, latest]
         mingw: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, latest]
         lang: [Fortran, C]
