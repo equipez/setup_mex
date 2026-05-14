@@ -18,7 +18,7 @@ jobs:
       matrix:
         os: [windows-2022, windows-latest]
         matlab: [R2024a, R2024b, R2025a, R2025b, R2026a, latest]
-        mingw: [8, 12, 13, 14, 15, latest]
+        mingw: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, latest]
         lang: [Fortran, C]
 
     steps:
@@ -50,8 +50,16 @@ jobs:
             choco install mingw -y --no-progress
             choco upgrade mingw -y --no-progress
           else
-            if [ "$VERSION" -eq 8 ]; then
+            if [ "$VERSION" -eq 6 ]; then
+              VERSION=6.4.0
+            elif [ "$VERSION" -eq 7 ]; then
+              VERSION=7.5.0
+            elif [ "$VERSION" -eq 8 ]; then
               VERSION=8.5.0
+            elif [ "$VERSION" -eq 9 ]; then
+              VERSION=9.4.0
+            elif [ "$VERSION" -eq 10 ]; then
+              VERSION=10.3.0
             else
               VERSION="${VERSION}".2.0
             fi
