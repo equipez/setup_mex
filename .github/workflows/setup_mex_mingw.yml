@@ -84,10 +84,13 @@ jobs:
           command: |
             % 'MW_MINGW64_LOC' should be set to the directory containing bin\gcc.exe and bin\gfortran.exe
             % See https://www.mathworks.com/matlabcentral/answers/313298-i-already-have-mingw-on-my-computer-how-do-i-configure-it-to-work-with-matlab
-            if strcmpi('${{ matrix.mingw }}', 'latest') || ${{ matrix.mingw }} > 12
-                setenv('MW_MINGW64_LOC', 'C:\ProgramData\mingw64\mingw64')
-            else
-                setenv('MW_MINGW64_LOC', 'C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64')
+            % The path has at least the following two possibilities. 
+            if exist('C:\ProgramData\mingw64\mingw64', 'dir')                                        
+                setenv('MW_MINGW64_LOC', 'C:\ProgramData\mingw64\mingw64');                          
+            elseif exist('C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64', 'dir')         
+                setenv('MW_MINGW64_LOC', 'C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64')    
+            else                                                                                     
+                error('MinGW is not found. Please check the installation path of MinGW and set MW_MINGW64_LOC environment variable accordingly.');    
             end
 
             lang = '${{ matrix.lang }}';
